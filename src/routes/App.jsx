@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 
+/**
+ * Index Page 
+ */
 function App() {
   useEffect(() => {
-    document.title = 'My Page Title';
+    document.title = 'Wasserarmsatt';
   }, [])
 
   return (
