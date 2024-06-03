@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import ShopItemList from "./components/ShopItemList";
+import ShopItemList from "../components/ShopItemList";
 
-function App() {
+function Shop() {
 
   /**
    * Represents an array of ShopItems for the shop.
@@ -42,4 +42,4 @@ function App() {
   )
 }
 
-export default App
+export default Shop
