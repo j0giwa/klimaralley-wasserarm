@@ -1,5 +1,4 @@
-import ShopItem from './ShopItem';
-
+import ShopItem from "./ShopItem";
 
 /**
  * ShopItemList UI component
@@ -11,7 +10,7 @@ import ShopItem from './ShopItem';
  */
 function ShopItemList({ shopItems }) {
   return (
-    <ul className="flex flex-wrap justify-around">
+    <ul className="flex flex-wrap justify-around mt-[88px]">
       {shopItems.map((shopItem) => (
         <ShopItem key={shopItem.id} shopItem={shopItem} />
       ))}
