@@ -4,6 +4,9 @@
  * @author Jonas Schwind
  * @version 0.6.0
  */
+
+import Shop from "../routes/Shop";
+
 // TODO: fixed sizes good idea?
 function ShopItem({ shopItem }) {
   return (
@@ -24,7 +27,7 @@ function ShopItem({ shopItem }) {
 	    Quantity
 	  </div>
 	  <div>
-          <button className="btn btn-outline btn-primary w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem] font-bold text-xl">+</button>
+          <button onClick={()=> Shop.onAdd} className="btn btn-outline btn-primary w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem] font-bold text-xl">+</button>
 	  </div>
         </div>
       </div>

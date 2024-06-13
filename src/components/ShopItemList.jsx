@@ -1,4 +1,5 @@
 import ShopItem from './ShopItem';
+import { useState } from 'react';
 
 
 /**
@@ -9,14 +10,17 @@ import ShopItem from './ShopItem';
  * @author Jonas Schwind
  * @version 0.6.0
  */
+
+ 
 function ShopItemList({ shopItems }) {
-  return (
-    <ul className="flex flex-wrap justify-around">
-      {shopItems.map((shopItem) => (
-        <ShopItem key={shopItem.id} shopItem={shopItem} />
-      ))}
-    </ul>
-  );
+   
+return (
+  <ul className="flex flex-wrap justify-around">
+    {shopItems.map((shopItem) => (
+      <ShopItem key={shopItem.id} shopItem={shopItem} />
+    ))}
+  </ul>
+);
 }
 
 export default ShopItemList;
