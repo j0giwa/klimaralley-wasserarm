@@ -10,11 +10,11 @@ import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/play/wasserarm",
     element: <App />,
   },
   {
-    path: "/shop",
+    path: "/play/wasserarm/shop",
     element: <Shop />,
   },
 ]);
