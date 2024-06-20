@@ -1,4 +1,6 @@
-import ShopItem from "./ShopItem";
+import ShopItem from './ShopItem';
+import { useState } from 'react';
+
 
 /**
  * ShopItemList UI component
@@ -8,6 +10,8 @@ import ShopItem from "./ShopItem";
  * @author Jonas Schwind
  * @version 0.6.0
  */
+
+ 
 function ShopItemList({ shopItems }) {
   return (
     <ul className="flex flex-wrap justify-around mt-[88px]">
