@@ -13,14 +13,13 @@ import { useState } from 'react';
 
  
 function ShopItemList({ shopItems }) {
-   
-return (
-  <ul className="flex flex-wrap justify-around">
-    {shopItems.map((shopItem) => (
-      <ShopItem key={shopItem.id} shopItem={shopItem} />
-    ))}
-  </ul>
-);
+  return (
+    <ul className="flex flex-wrap justify-around mt-[88px]">
+      {shopItems.map((shopItem) => (
+        <ShopItem key={shopItem.id} shopItem={shopItem} />
+      ))}
+    </ul>
+  );
 }
 
 export default ShopItemList;
