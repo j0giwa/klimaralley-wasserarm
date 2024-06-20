@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-
+import Header_Fruits  from "../components/Header_Fruits";
 /**
  * Index Page 
  */
@@ -11,9 +11,9 @@ function App() {
   return (
     <>
       <main>
-	<div className="container">
-	  <h1>test</h1>
-	</div>
+        <div className="container">
+          <Header_Fruits />
+        </div>
       </main>
     </>
   )
