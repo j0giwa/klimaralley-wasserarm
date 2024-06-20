@@ -1,14 +1,14 @@
 /**
  * Shopitem UI component
  *
- * @author Jonas Schwind
- * @version 0.6.0
+ * @author Jonas Schwind & Alexander Golüke
+ * @version 0.7.0
  */
 
-import Shop from "../routes/Shop";
+//import Shop from "../routes/Shop";
 
 // TODO: fixed sizes good idea?
-function ShopItem({ shopItem }) {
+function ShopItem({ shopItem, onAdd }) {
   return (
     <li>
       <div className="card w-[184px] h-[313px] my-3 bg-[#9EFFB9] bg-opacity-30 shadow-xl">
@@ -27,9 +27,8 @@ function ShopItem({ shopItem }) {
             Quantity
           </div>
           <div>
-            <button onClick={() => Shop.onAdd} className="btn btn-outline btn-primary w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem] font-bold text-xl">+</button>
+            <button onClick={() => onAdd(shopItem)} className="btn btn-outline btn-primary w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem] font-bold text-xl">+</button>
           </div>
-
         </div>
       </div>
     </li>

@@ -1,3 +1,10 @@
+/**
+ * The Header of the website and the functions
+ *
+ * @author Marlon Schrader
+ * @version 0.5.0
+ */
+
 function Header() {
   return (
     <>

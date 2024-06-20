@@ -1,5 +1,4 @@
 import ShopItem from './ShopItem';
-import { useState } from 'react';
 
 
 /**
@@ -7,16 +6,17 @@ import { useState } from 'react';
  *
  * Provides a dashboard like view with ShopItem's
  *
- * @author Jonas Schwind
- * @version 0.6.0
+ * @author Jonas Schwind & Alexander Golüke
+ * @version 0.7.0
  */
 
- 
-function ShopItemList({ shopItems }) {
+
+function ShopItemList({ shopItems, onAdd }) {
+
   return (
-    <ul className="flex flex-wrap justify-around mt-[88px]">
+    <ul className="flex flex-wrap justify-around">
       {shopItems.map((shopItem) => (
-        <ShopItem key={shopItem.id} shopItem={shopItem} />
+        <ShopItem key={shopItem.id} shopItem={shopItem} onAdd={onAdd} />
       ))}
     </ul>
   );
