@@ -14,7 +14,7 @@ function ShopItem({ shopItem, onAdd }) {
       <div className="card w-[184px] h-[313px] my-3 bg-[#9EFFB9] bg-opacity-30 shadow-xl">
         <figure className="w-[184px] h-[145px] m-auto">
           {/* TODO: maybe get picture from backend */}
-          <img className="object-cover" src="test.png" alt={shopItem.name} />
+          <img className="object-cover" src={`data:image/webp;base64,${shopItem.icon}`} alt={shopItem.name} />
         </figure>
         <div className="card-body items-center text-center">
           <h2 className="card-title">{shopItem.name}</h2>
