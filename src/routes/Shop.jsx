@@ -13,12 +13,16 @@ import ShopItemList from "../components/ShopItemList";
 function Shop() {
   
   /**
+   * @typedef {'FRUIT' | 'VEGETABLE' | 'MEAT' | 'ANINAL_PRODUCT' | 'DRINK'} ItemType
+   */
+
+  /**
    * Represents an array of ShopItems for the shop.
    *
    * @typedef {Object} ShopItem
    * @property {number} id - The ID of the object.
    * @property {String} name - Name of the product.
-   * @property {Enumerator} type - Type (Kategory) of the product.
+   * @property {ItemType} type - Type (Kategory) of the product.
    * @property {number} water - waterusage of the product.
    * @property {number} price - price of the product.
    */
