@@ -7,7 +7,6 @@
  * @author Alexander Golüke
  * @version 0.8.5
  */
-
 // TODO: fixed sizes good idea?
 function ShopItem({ shopItem, onAdd }) {
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ShoppingCart from "../routes/Cart";
+import ShoppingCart from "../components/Cart";
 
 /**
  * The Footer of the website and the functions
