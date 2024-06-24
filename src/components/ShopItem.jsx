@@ -5,7 +5,7 @@
  *
  * @author Jonas Schwind
  * @author Alexander Golüke
- * @version 0.7.0
+ * @version 0.8.5
  */
 
 // TODO: fixed sizes good idea?
@@ -16,7 +16,7 @@ function ShopItem({ shopItem, onAdd }) {
    * or a fallback image.
    * 
    * @param {String} icon icon from the api
-   * @returns api image, or fallback image if icon is null.
+   * @returns base64 api image, or path to fallback image if icon is null.
    */
   const getIcon = (icon) => {
     return icon
