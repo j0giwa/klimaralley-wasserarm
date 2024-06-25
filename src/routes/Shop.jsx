@@ -1,21 +1,28 @@
 import { useState, useEffect } from "react"
-import ShopItem from "../components/ShopItem";
-import ShoppingCart from "./Cart";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import ShopItemList from "../components/ShopItemList";
 
 /**
  * Shop page (main part) of the wasserarm-satt game
  *
  * @author Jonas Schwind
- * @version 0.4.0
+ * @author Alexander Golüke
+ * @version 0.6.0
  */
 function Shop() {
+  
+  /**
+   * @typedef {'FRUIT' | 'VEGETABLE' | 'MEAT' | 'ANINAL_PRODUCT' | 'DRINK'} ItemType
+   */
+
   /**
    * Represents an array of ShopItems for the shop.
    *
    * @typedef {Object} ShopItem
    * @property {number} id - The ID of the object.
    * @property {String} name - Name of the product.
-   * @property {Enumerator} type - Type (Kategory) of the product.
+   * @property {ItemType} type - Type (Kategory) of the product.
    * @property {number} water - waterusage of the product.
    * @property {number} price - price of the product.
    */
@@ -23,11 +30,20 @@ function Shop() {
   /** @type {ShopItem[]} */
   const [shopItems, setShopItems] = useState([]);
 
-  // Used for ui programming without backend connection TODO: delete after
+  /** @type {ShopItem[]} */
+  const [cartItems, setCartItems] = useState([]);
+
+  /**
+   * Used for ui programming without backend connection.
+   * 
+   * TODO: delete after
+   * 
+   * @type {ShopItem[]} 
+   */
   const fakeShopItems = [
-    { id: 0, name: "Fake Ding", type: "DRINK", water: 0, price: 0 },
+    { id: 0, name: "Fake", type: "DRINK", water: 0, price: 0 },
     { id: 1, name: "Fake Röstkaffe", type: "DRINK", water: 21000, price: 50 },
-    { id: 2, name: " Fake Rindfleisch", type: "MEAT", water: 15455, price: 200 },
+    { id: 2, name: "Fake Rindfleisch", type: "MEAT", water: 15455, price: 200 },
     {
       id: 3,
       name: "Fake Schokolade",
@@ -51,7 +67,7 @@ function Shop() {
     { id: 17, name: "Fake Weizen", type: "VEGETABLE", water: 1000, price: 30 },
     { id: 18, name: "Fake Milch", type: "ANINAL_PRODUCT", water: 1000, price: 50 },
     { id: 19, name: "Fake Wein", type: "DRINK", water: 1000, price: 180 },
-    { id: 20, name: "Fake Apfelsaft", type: "DRINK", water: 950, price: 30 },
+    { id: 20, name: "Apfelsaft", type: "DRINK", water: 950, price: 30 },
     { id: 21, name: "Fake Mais", type: "DRINK", water: 900, price: 40 },
     { id: 22, name: "Fake Orangensaft", type: "DRINK", water: 850, price: 20 },
     { id: 23, name: "Fake Bier", type: "DRINK", water: 300, price: 20 },
@@ -78,22 +94,58 @@ function Shop() {
       });
   }, []);
 
-  const [list, setlist] = useState([fakeShopItems])
+  /**
+   * Looks if the item is already in the cart and if so will add the quantity.
+   * Else it will add the item
+   * 
+   * @param {ShopItem} shopItem
+   */
+  const onAdd = (shopItem) => {
+    const exist = cartItems.find((x) => x.id === shopItem.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === shopItem.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...shopItem, qty: 1 }]);
+    }
+  };
+
+  /**
+   * Looks if the item is only one and if so it will be removed complitly.
+   * Else it will remove one from the quantity.
+   * 
+   * @param {ShopItem} shopItem
+   */
+  const onRemove = (shopItem) => {
+    const exist = cartItems.find((x) => x.id === shopItem.id);
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== shopItem.id));
+    } else {
+      setCartItems(cartItems.map(x => x.id === shopItem.id ? { ...exist, qty: exist.qty - 1 } : x
+      )
+      );
+    }
+  };
+
   return (
     <>
       <Header />
-
       <main>
-        <div className="container-main">
-          <div className="container-product">
-            <ShopItem onAdd={() => list.map((item) => (
-        <li key={item.id}>{item.name} {item.type} {item.water} {item.price}</li>
-      ))} shopItems={shopItems} />
+        <div className="container">
+          <ShopItemList
+            shopItems={shopItems}
+            onAdd={onAdd} />
+          <div className="container-main">
           </div>
-          <ShoppingCart />
         </div>
       </main>
-      <Footer />
+      <Footer
+        cartItems={cartItems}
+        onAdd={onAdd}
+        onRemove={onRemove} />
     </>
   );
 }
