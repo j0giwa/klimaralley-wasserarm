@@ -1,5 +1,6 @@
 import { useEffect } from "react"
-import Header_Fruits  from "../components/Header_Fruits";
+import HeaderFoodCategories  from "../components/Searchbar";
+import CategorieFruit from "./CategorieFruit";
 /**
  * Index Page 
  */
@@ -9,13 +10,11 @@ function App() {
   }, [])
 
   return (
-    <>
-      <main>
-        <div className="container">
-          <Header_Fruits />
-        </div>
-      </main>
-    </>
+    <main>
+      <div className="container mx-auto">
+        <CategorieFruit />
+      </div>
+    </main>
   )
 }
 

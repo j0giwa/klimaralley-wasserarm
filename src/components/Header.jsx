@@ -1,36 +1,30 @@
-/**
- * The Header of the website and the functions
- *
- * @author Marlon Schrader
- * @version 0.5.0
- */
-
 function Header() {
   return (
     <>
-      <div className="flex justify-between items-center fixed top-0 left-0 right-0 z-10 h-[88px] mb-[88px] w-[430px] px-[16px] py-[24px]  bg-[#9EFFB9]">
+      <div className="flex justify-between items-center top-0 left-0 right-0 h-[88px] w-full px-[16px] py-[24px]  bg-[#9EFFB9]/20 backdrop-blur-md">
         {/* Language change */}
         <details className="dropdown">
-          <summary className="btn w-[35px] h-[35px] p-0 bg-transparent border-none w-[35px] h-[35px] p-0">
-            <img src="/translation-icon.webp" class="rounded-full"></img>
+          <summary className="btn hover:bg-green-800 w-[35px] h-[35px] p-0 bg-transparent border-none">
+            <img src="public/images/language_image.svg" className="rounded-full" />
           </summary>
-          <ul className="p-2 menu dropdown-content z-[1] bg-base-100 rounded-box">
-            <li>English</li>
-            <li>German</li>
+          <ul className="dropdown-content z-[9000] bg-[#9EFFB9]/20 backdrop-blur-md rounded-box w-36 h-[110px] flex flex-col justify-between">
+            <li className="w-full px-[11px] py-[8px]">English</li>
+            <li className="w-full px-[11px] py-[8px]">German</li>
           </ul>
         </details>
 
         {/* Money */}
-        <button className="btn bg-[#E5F0FF] text-[#75F94C] border-white">
-          300 🪙
-        </button>
+        <div className="bg-[#E5F0FF]/60 rounded-full border-#E5F0FF border-2 p-2.5 w-[95px] flex justify-between">
+        <p className="text-[#75F94C]">500</p>
+        <span>🪙</span>
+        </div>
 
         {/* Profile */}
         <details className="dropdown dropdown-end">
           <summary className="btn w-[45px] h-[40px] p-0 bg-white border-white">
-            <img src="/dummyPB.webp" class="rounded-full"></img>
+            <img src="public/dummyPB.webp" class="rounded-full" />
           </summary>
-          <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-[100px]">
+          <ul className="px-[16px] py-[20px] shadow menu dropdown-content z-[1] bg-[#9EFFB9]/20 backdrop-blur-md rounded-box w-[122px] h-28 flex flex-col justify-between">
             <li>Edit Profile</li>
             <li>Home</li>
             <li>Logout</li>
