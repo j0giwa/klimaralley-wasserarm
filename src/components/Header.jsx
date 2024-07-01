@@ -1,13 +1,21 @@
+import React from "react";
+/**
+ * Header UI Component
+ * 
+ * Provide Header
+ * @author R. Walter Dongmepi W. & Marlon Schrader
+ */
+
+
 function Header() {
   return (
-    <>
-      <div className="flex justify-between items-center top-0 left-0 right-0 h-[88px] w-full px-[16px] py-[24px]  bg-[#9EFFB9]/20 backdrop-blur-md">
+      <div className="flex justify-between items-center top-0 left-0 right-0 h-[88px] w-full px-[16px] py-[24px]  bg-[#6CA96C]/60 backdrop-blur-3xl fixed z-20">
         {/* Language change */}
         <details className="dropdown">
           <summary className="btn hover:bg-green-800 w-[35px] h-[35px] p-0 bg-transparent border-none">
-            <img src="public/images/language_image.svg" className="rounded-full" />
+            <img src="public/images/language_image.svg" className="rounded-full" alt="language icon"/>
           </summary>
-          <ul className="dropdown-content z-[9000] bg-[#9EFFB9]/20 backdrop-blur-md rounded-box w-36 h-[110px] flex flex-col justify-between">
+          <ul className="dropdown-content z-[9000] bg-[#9EFFB9]/20 backdrop-blur-3xl rounded-box w-36 h-[110px] flex flex-col justify-between">
             <li className="w-full px-[11px] py-[8px]">English</li>
             <li className="w-full px-[11px] py-[8px]">German</li>
           </ul>
@@ -22,16 +30,15 @@ function Header() {
         {/* Profile */}
         <details className="dropdown dropdown-end">
           <summary className="btn w-[45px] h-[40px] p-0 bg-white border-white">
-            <img src="public/dummyPB.webp" class="rounded-full" />
+            <img src="public/dummyPB.webp" className="rounded-full" alt="avatar icon"/>
           </summary>
-          <ul className="px-[16px] py-[20px] shadow menu dropdown-content z-[1] bg-[#9EFFB9]/20 backdrop-blur-md rounded-box w-[122px] h-28 flex flex-col justify-between">
+          <ul className="px-[16px] py-[20px] shadow menu dropdown-content bg-[#6CA96C]/60 backdrop-blur-3xl  rounded-box w-[122px] h-28 flex flex-col justify-between">
             <li>Edit Profile</li>
             <li>Home</li>
             <li>Logout</li>
           </ul>
         </details>
       </div>
-    </>
   );
 }
 

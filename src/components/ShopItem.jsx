@@ -25,7 +25,7 @@ function ShopItem({ shopItem, onAdd }) {
 
   return (
     <li>
-      <div className="card w-[184px] h-[313px] my-3 bg-[#9EFFB9] bg-opacity-30 shadow-xl">
+      <div className="card w-[184px] h-[313px] my-3 bg-[#6CA96C]/60 backdrop-blur-3xl shadow-xl">
         <figure className="w-[184px] h-[145px] m-auto">
           <img className="object-cover" src={getIcon(shopItem.icon)} alt={shopItem.name} />
         </figure>

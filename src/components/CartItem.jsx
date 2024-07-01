@@ -1,7 +1,9 @@
+import React from "react";
+
 /**
  * Cartitem UI component
  *
- * @author Jonas Schwind
+ * @author Jonas Schwind & Walter Dongmepi
  * @version 0.8.5
  */
 

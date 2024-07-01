@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ShopItemList from "../components/ShopItemList";
+import CategorieFruit from "./CategorieFruit";
 
 /**
  * Shop page (main part) of the wasserarm-satt game
@@ -125,10 +126,10 @@ function Shop() {
   };
 
   return (
-    <>
-      <Header />
+    <div className="bg-map-background bg-no-repeat bg-fixed bg-center bg-cover">
+      <CategorieFruit />
       <main>
-        <div className="container">
+        <div className="container mx-auto mt-[88px] max-w-[834px]">
           <ShopItemList
             shopItems={shopItems}
             onAdd={onAdd} />
@@ -140,7 +141,7 @@ function Shop() {
         cartItems={cartItems}
         onAdd={onAdd}
         onRemove={onRemove} />
-    </>
+    </div>
   );
 }
 

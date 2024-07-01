@@ -1,6 +1,8 @@
-import { useEffect } from "react"
-import HeaderFoodCategories  from "../components/Searchbar";
+import React, { useEffect } from "react"
 import CategorieFruit from "./CategorieFruit";
+import ShoppingCart from "../components/ShoppingCart";
+import CartItem from "../components/CartItem";
+
 /**
  * Index Page 
  */

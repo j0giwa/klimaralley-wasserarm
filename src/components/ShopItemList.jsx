@@ -14,7 +14,7 @@ import ShopItem from './ShopItem';
 function ShopItemList({ shopItems, onAdd }) {
 
   return (
-    <ul className="flex flex-wrap justify-around">
+    <ul className="flex flex-wrap justify-around py-4">
       {shopItems.map((shopItem) => (
         <ShopItem key={shopItem.id} shopItem={shopItem} onAdd={onAdd} />
       ))}
