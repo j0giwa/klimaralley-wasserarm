@@ -1,6 +1,5 @@
 import ShopItem from './ShopItem';
 
-
 /**
  * ShopItemList UI component
  *
@@ -9,8 +8,6 @@ import ShopItem from './ShopItem';
  * @author Jonas Schwind & Alexander Golüke
  * @version 0.7.0
  */
-
-
 function ShopItemList({ shopItems, onAdd }) {
 
   return (

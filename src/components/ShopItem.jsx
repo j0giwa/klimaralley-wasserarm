@@ -1,4 +1,3 @@
-//import Shop from "../routes/Shop";
 
 /**
  * Shopitem UI component
