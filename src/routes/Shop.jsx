@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ShopItemList from "../components/ShopItemList";
-import CategorieFruit from "./CategorieFruit";
 
 /**
  * Shop page (main part) of the wasserarm-satt game
@@ -90,6 +89,17 @@ function Shop() {
   }, []);
 
   /**
+   * Pares shop and reuturn s alll categorys
+   * 
+   * @param {*} items 
+   * @returns 
+   */
+  const getUniqueTypes = (items) => {
+    const types = items.map(item => item.type);
+    return [...new Set(types)];
+  };
+
+  /**
    * Looks if the item is already in the cart and if so will add the quantity.
    * Else it will add the item
    * 
@@ -127,7 +137,9 @@ function Shop() {
 
   return (
     <div className="bg-map-background bg-no-repeat bg-fixed bg-center bg-cover">
-      <CategorieFruit />
+      <header>
+        <Header searchBar={true} categorys={getUniqueTypes(shopItems)}/>
+      </header>
       <main>
         <div className="container mx-auto mt-[88px] max-w-[834px]">
           <ShopItemList

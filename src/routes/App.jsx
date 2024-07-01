@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
-import CategorieFruit from "./CategorieFruit";
-import ShoppingCart from "../components/ShoppingCart";
-import CartItem from "../components/CartItem";
+import Header from "../components/Header";
 
 /**
  * Index Page 
@@ -12,12 +10,17 @@ function App() {
   }, [])
 
   return (
-    <main>
-      <div className="container mx-auto">
-        <CategorieFruit />
-      </div>
-    </main>
+    <>
+      <header>
+        <Header />
+      </header>
+      <main>
+        <div className="container mx-auto">
+          test
+        </div>
+      </main>
+    </>
   )
 }
 
-export default App
+export default App;
