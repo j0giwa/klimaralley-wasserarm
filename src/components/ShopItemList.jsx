@@ -5,7 +5,8 @@ import ShopItem from './ShopItem';
  *
  * Provides a dashboard like view with ShopItem's
  *
- * @author Jonas Schwind & Alexander Golüke
+ * @author Jonas Schwind
+ * @author Alexander Golüke
  * @version 0.7.0
  */
 function ShopItemList({ shopItems, onAdd }) {

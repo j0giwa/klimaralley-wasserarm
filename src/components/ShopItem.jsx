@@ -39,7 +39,10 @@ function ShopItem({ shopItem, onAdd }) {
             Quantity
           </div>
           <div>
-            <button onClick={() => onAdd(shopItem)} className="btn btn-outline btn-primary w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem] font-bold text-xl">+</button>
+            <button className="btn btn-outline btn-primary w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem] font-bold text-xl"
+              onClick={() => onAdd(shopItem)}>
+                &times;
+            </button>
           </div>
         </div>
       </div>

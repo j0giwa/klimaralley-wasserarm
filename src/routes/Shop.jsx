@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ShopItemList from "../components/ShopItemList";
+import ShopItemListSkeleton from "../components/ShopItemListSkeleton";
 
 /**
  * Shop page (main part) of the wasserarm-satt game
@@ -32,6 +33,9 @@ function Shop() {
 
   /** @type {ShopItem[]} */
   const [cartItems, setCartItems] = useState([]);
+
+  /** @type {boolean} */
+  const [loading, setLoading] = useState(true);
 
   /**
    * Used for ui programming without backend connection.
@@ -80,16 +84,17 @@ function Shop() {
     fetch("http://localhost:8080/water/items")
       .then((response) => response.json())
       .then((jsondata) => {
+        setLoading(false);
         setShopItems(jsondata);
       })
       .catch((err) => {
         console.error(err.message);
-        setShopItems(fakeShopItems); //TODO: Delete after
+        //setShopItems(fakeShopItems); //TODO: Delete after
       });
   }, []);
 
   /**
-   * Pares shop and reuturn s alll categorys
+   * Pares shopitems and returns all unique item-types (categorys) 
    * 
    * @param {*} items 
    * @returns 
@@ -142,9 +147,7 @@ function Shop() {
       </header>
       <main>
         <div className="container mx-auto mt-[88px] max-w-[834px]">
-          <ShopItemList
-            shopItems={shopItems}
-            onAdd={onAdd} />
+          {loading && <ShopItemListSkeleton length={8}/> || <ShopItemList shopItems={shopItems} onAdd={onAdd} />}
           <div className="container-main">
           </div>
         </div>
