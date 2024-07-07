@@ -1,10 +1,11 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import Header from "../components/Header";
 
 /**
  * Index Page 
  */
 function App() {
+
   useEffect(() => {
     document.title = 'Wasserarmsatt';
   }, [])

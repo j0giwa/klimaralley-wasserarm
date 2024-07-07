@@ -85,11 +85,13 @@ function Shop() {
       .then((response) => response.json())
       .then((jsondata) => {
         setLoading(false);
+        console.log(jsondata);
         setShopItems(jsondata);
       })
       .catch((err) => {
         console.error(err.message);
-        //setShopItems(fakeShopItems); //TODO: Delete after
+        setLoading(false); //TODO: Delete after
+        setShopItems(fakeShopItems); //TODO: Delete after
       });
   }, []);
 
@@ -141,15 +143,13 @@ function Shop() {
   };
 
   return (
-    <div className="bg-map-background bg-no-repeat bg-fixed bg-center bg-cover">
+    <div className="dark:bg-map-background dark:bg-no-repeat dark:bg-fixed dark:bg-center dark:bg-cover">
       <header>
         <Header searchBar={true} categorys={getUniqueTypes(shopItems)}/>
       </header>
       <main>
-        <div className="container mx-auto mt-[88px] max-w-[834px]">
+        <div className="container container-main mx-auto mt-[88px] max-w-[834px]">
           {loading && <ShopItemListSkeleton length={8}/> || <ShopItemList shopItems={shopItems} onAdd={onAdd} />}
-          <div className="container-main">
-          </div>
         </div>
       </main>
       <Footer

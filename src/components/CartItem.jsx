@@ -1,12 +1,11 @@
-import React from "react";
 
 /**
  * Cartitem UI component
  *
- * @author Jonas Schwind & Walter Dongmepi
+ * @author Jonas Schwind
+ * @author Walter Dongmepi
  * @version 0.8.5
  */
-
 function CartItem({ cartItem, onAdd, onRemove }){
 
   return (

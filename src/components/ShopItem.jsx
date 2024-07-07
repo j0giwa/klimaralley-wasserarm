@@ -24,14 +24,14 @@ function ShopItem({ shopItem, onAdd }) {
 
   return (
     <li>
-      <div className="card w-[184px] h-[313px] my-3 bg-[#6CA96C]/60 backdrop-blur-3xl shadow-xl">
+      <div className="card w-[184px] h-[313px] my-3 bg-base-200 shadow-xl">
         <figure className="w-[184px] h-[145px] m-auto">
           <img className="object-cover" src={getIcon(shopItem.icon)} alt={shopItem.name} />
         </figure>
         <div className="card-body items-center text-center">
           <h2 className="card-title">{shopItem.name}</h2>
           <p>
-            Wasser: <span className="text-primary">{shopItem.water}</span>
+            Wasser: <span className="text-info">{shopItem.water}</span>
           </p>
         </div>
         <div className="card-actions justify-end p-0">

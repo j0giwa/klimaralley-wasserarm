@@ -1,4 +1,5 @@
 import SearchBar from './Searchbar';
+import ThemeController from './ThemeController';
 
 /**
  * Header UI Component
@@ -16,31 +17,32 @@ import SearchBar from './Searchbar';
 function Header({ searchBar, categorys }) {
 
   return (
-    <div className="top-0 left-0 right-0 w-full px-[16px] py-[24px] bg-[#6CA96C]/60 backdrop-blur-3xl fixed z-20">
-      <div className='flex justify-between items-center'>
+    <div className="fixed top-0 left-0 right-0 z-20 w-full px-[16px] py-[24px] bg-base-100 backdrop-blur-3xl">
+      <div className="flex items-center justify-between">
+
         {/* Language change */}
         <details className="dropdown">
-          <summary className="btn hover:bg-green-800 w-[35px] h-[35px] p-0 bg-transparent border-none">
-            <img src="public/images/language_image.svg" className="rounded-full" alt="language icon" />
+          <summary className="btn w-[35px] h-[35px] p-0 bg-transparent border-none shadow-none">
+            <img src="public/images/language_image.svg" className="fill-base-content" alt="language icon" />
           </summary>
-          <ul className="dropdown-content z-[9000] bg-[#9EFFB9]/20 backdrop-blur-3xl rounded-box w-36 h-[110px] flex flex-col justify-between">
+          <ul className="z-[9000] w-36 h-[110px] flex flex-col justify-between bg-base-100 backdrop-blur-3xl rounded-box dropdown-content">
             <li className="w-full px-[11px] py-[8px]">English</li>
             <li className="w-full px-[11px] py-[8px]">German</li>
           </ul>
         </details>
 
         {/* Money */}
-        <div className="bg-[#E5F0FF]/60 rounded-full border-#E5F0FF border-2 p-2.5 w-[95px] flex justify-between">
-          <p className="text-[#75F94C]">500</p>
+        <div className="flex justify-between w-[95px] p-2.5 bg-base-200 border-2 border-base-300 rounded-full">
+          <p>500</p>
           <span>🪙</span>
         </div>
 
         {/* Profile */}
         <details className="dropdown dropdown-end">
-          <summary className="btn w-[45px] h-[40px] p-0 bg-white border-white">
+          <summary className="btn w-[45px] h-[40px] p-0 bg-transparent border-white shadow-none">
             <img src="public/dummyPB.webp" className="rounded-full" alt="avatar icon" />
           </summary>
-          <ul className="px-[16px] py-[20px] shadow menu dropdown-content bg-[#6CA96C]/60 backdrop-blur-3xl  rounded-box w-[122px] h-28 flex flex-col justify-between">
+          <ul className="flex flex-col justify-between menu dropdown-content w-[122px] h-28 px-[16px] py-[20px] z-50 bg-base-100 rounded-box">
             <li>Edit Profile</li>
             <li>Home</li>
             <li>Logout</li>
@@ -52,6 +54,7 @@ function Header({ searchBar, categorys }) {
           <SearchBar categories={categorys} />
         </div>
       )}
+      <ThemeController />
     </div>
   );
 }
