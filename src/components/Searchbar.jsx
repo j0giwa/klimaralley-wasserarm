@@ -13,7 +13,7 @@ function Searchbar ({ categories }) {
     <>
       <details className="dropdown">
         <summary className="btn bg-inherit m-1 font-semibold text-[23px] border-none">Kategorien</summary>
-        <ul className="menu dropdown-content bg-[#6CA96C]/60 backdrop-blur-3xl rounded-box z-[1] w-52 p-2 shadow">
+        <ul className="menu dropdown-content bg-base-100/60 backdrop-blur-3xl rounded-box z-[1] w-52 p-2 shadow">
           {categories.map((type, index) => (
             <li key={index}>{type}</li>
           ))}
