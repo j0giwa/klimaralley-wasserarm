@@ -3,9 +3,9 @@ import { getCookie, setCookie } from "../lib/cookieUtils";
 
 /**
  * Theme Controller Component
- * 
+ *
  * Cookie based toogling of light/dark mode.
- * 
+ *
  * @returns {JSX.Element}
  * @author Jonas Schwind
  * @version 1.0.0
@@ -20,6 +20,7 @@ function ThemeController() {
   useEffect(() => {
     setCookie('isdark', JSON.stringify(isdark), { path: '/' });
 
+    // HACK: Sledgehammer setting of dakmode
     if (isdark) {
       document.documentElement.classList.add('dark');
       document.documentElement.setAttribute('data-theme', 'forest');
@@ -28,7 +29,7 @@ function ThemeController() {
       document.documentElement.removeAttribute('data-theme');
     }
   }, [isdark]);
-  
+
   return (
     <label className="grid cursor-pointer place-items-center w-1">
       <input type="checkbox" className="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1"
