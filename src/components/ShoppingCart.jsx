@@ -15,9 +15,9 @@ async function submit(wasserarmShopItems) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-    eaterid: 0,
+      eaterid: 0,
       items: wasserarmShopItems
-      }),
+    }),
   })
   .then((response) => response.json())
   .then((data) => { console.log(data); })

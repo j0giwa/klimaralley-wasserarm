@@ -24,7 +24,7 @@ export default {
       },
       "forest"
     ],
+    darkMode: ['class', '[data-theme="forest"]']
   },
   darkMode: ['class', '[data-theme="forest"]']
 }
-

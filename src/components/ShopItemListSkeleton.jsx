@@ -14,7 +14,7 @@ function ShopItemListSkeleton({length}) {
     <ul className="flex flex-wrap justify-around py-4">
       {Array(length).fill(0).map((item, i) =>
       <li key={i}>
-          <div className="card w-[184px] h-[313px] my-3 bg-base-300 shadow-xl">
+          <div className="card w-[184px] h-[313px] my-3 bg-base-200 shadow-xl">
           <figure className="w-[184px] h-[145px] m-auto skeleton skeleton-wave">
             <div className="skeleton w-full h-full bg-base-300"></div>
           </figure>

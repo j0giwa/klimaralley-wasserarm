@@ -19,6 +19,14 @@ function ThemeController() {
 
   useEffect(() => {
     setCookie('isdark', JSON.stringify(isdark), { path: '/' });
+
+    if (isdark) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'forest');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.removeAttribute('data-theme');
+    }
   }, [isdark]);
   
   return (

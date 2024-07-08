@@ -17,7 +17,7 @@ import ThemeController from './ThemeController';
 function Header({ searchBar, categorys }) {
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-20 w-full px-[16px] py-[24px] bg-base-100 backdrop-blur-3xl">
+    <div className="fixed top-0 left-0 right-0 z-20 w-full px-[16px] py-[24px] bg-base-100 dark:bg-base-100/60 dark:backdrop-blur-3xl">
       <div className="flex items-center justify-between">
 
         {/* Language change */}
