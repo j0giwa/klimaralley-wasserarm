@@ -33,4 +33,8 @@ To create a production version of your app:
 ```bash
 npm run build
 ```
+## Design
+
+current design of the project. Dark and light mode have been updated. Here is the link: https://www.figma.com/design/0kwsHifbLX3wElfxblSbiS/First-Edition?node-id=989-11250&t=JYSJLsFB1MegeAo1-1
+I'm open to critcism.
 
