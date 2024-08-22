@@ -17,17 +17,17 @@ import ThemeController from './ThemeController';
 function Header({ searchBar, categorys }) {
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-20 w-full px-[16px] py-[24px] bg-base-300 dark:bg-base-100/60 dark:backdrop-blur-3xl">
-      <div className="flex items-center justify-between">
+    <div className="fixed top-0 left-0 right-0 z-20 w-full px-4 py-6 bg-base-300 dark:bg-base-100/60 dark:backdrop-blur-3xl">
+      <div className="flex items-center justify-between pb-6">
 
         {/* Language change */}
         <details className="dropdown">
-          <summary className="btn w-[35px] h-[35px] p-0 bg-transparent border-none shadow-none">
-          <svg className='fill-base-content' width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 8.125C13.8975 8.125 14.625 7.39746 14.625 6.5C14.625 5.60254 13.8975 4.875 13 4.875C12.1025 4.875 11.375 5.60254 11.375 6.5C11.375 7.39746 12.1025 8.125 13 8.125Z"/>
-              <path d="M13 14.625C13.8975 14.625 14.625 13.8975 14.625 13C14.625 12.1025 13.8975 11.375 13 11.375C12.1025 11.375 11.375 12.1025 11.375 13C11.375 13.8975 12.1025 14.625 13 14.625Z"/>
-              <path d="M13 21.125C13.8975 21.125 14.625 20.3975 14.625 19.5C14.625 18.6025 13.8975 17.875 13 17.875C12.1025 17.875 11.375 18.6025 11.375 19.5C11.375 20.3975 12.1025 21.125 13 21.125Z"/>
-          </svg>
+          <summary className="btn w-[35px] h-[35px] px-0 bg-transparent border-none shadow-none">
+            <svg className='fill-base-content' width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 8.125C13.8975 8.125 14.625 7.39746 14.625 6.5C14.625 5.60254 13.8975 4.875 13 4.875C12.1025 4.875 11.375 5.60254 11.375 6.5C11.375 7.39746 12.1025 8.125 13 8.125Z"/>
+                <path d="M13 14.625C13.8975 14.625 14.625 13.8975 14.625 13C14.625 12.1025 13.8975 11.375 13 11.375C12.1025 11.375 11.375 12.1025 11.375 13C11.375 13.8975 12.1025 14.625 13 14.625Z"/>
+                <path d="M13 21.125C13.8975 21.125 14.625 20.3975 14.625 19.5C14.625 18.6025 13.8975 17.875 13 17.875C12.1025 17.875 11.375 18.6025 11.375 19.5C11.375 20.3975 12.1025 21.125 13 21.125Z"/>
+            </svg>
           </summary>
           <ul className="z-[9000] w-36 flex flex-col bg-base-300 border-base-content border-2 backdrop-blur-3xl rounded-box dropdown-content dark:border-base-content dark:border-2 px-3 py-5 gap-2">
             <li className="w-fit flex gap-6">
@@ -62,7 +62,7 @@ function Header({ searchBar, categorys }) {
         </details>
       </div>
       {searchBar && (
-        <div className="flex-col px-4 pb-6">
+        <div className="flex-col">
           <SearchBar categories={categorys} />
         </div>
       )}

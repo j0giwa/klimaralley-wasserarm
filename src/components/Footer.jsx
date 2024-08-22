@@ -9,6 +9,7 @@ import storyIcon from "../../public/icons/Storytelling-icon.png"
  *
  * @author Marlon Schrader
  * @author Alexander Golüke
+ * @author R. Walter Dongmepi W.
  * @version 0.5.0
  */
 function Footer({ cartItems, onAdd, onRemove }) {
@@ -20,14 +21,14 @@ function Footer({ cartItems, onAdd, onRemove }) {
 
   return (
     <>
-      <div className="flex justify-between items-center px-7 py- fixed bottom-0 left-1/2 transform -translate-x-1/2 z-10 w-[374px] h-[60px] mx-[30px] my-[4px] bg-base-300 backdrop-blur-sm rounded-full border-base-content border-2 dark:border-base-content dark:border-2">
-        <div>
+      <div className="flex justify-between items-center px-7 fixed bottom-0 left-1/2 -translate-x-1/2 z-10 w-[374px] h-[60px] mx-auto my-[4px] bg-base-300 backdrop-blur-sm rounded-full border-base-content border-2 dark:border-base-content dark:border-2">
+        <div className="btn btn-ghost bg-transparent border-none px-1 mx-0 rounded-xl">
           <img src={shopIcon} alt="image of shop icon" />
         </div>
-        <div>
+        <div className="btn btn-ghost bg-transparent border-none px-1 rounded-xl">
           <img src={storyIcon} alt="image of story icon" />
         </div>
-        <button className="btn-ghost" onClick={togglePopup}>
+        <button className="btn bg-transparent border-none px-1 btn-ghost rounded-xl" onClick={togglePopup}>
           <img src={ingredientscart} alt="icon of shopping cart" />
         </button>
         {isOpen && (

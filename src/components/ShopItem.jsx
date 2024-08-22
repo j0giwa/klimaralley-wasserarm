@@ -35,17 +35,21 @@ function ShopItem({ shopItem, onAdd }) {
           </p>
         </div>
         <div className="card-actions justify-end p-0">
-          <div className="w-full py-[8px] px-[10px] flex justify-between">
+          <div className="w-full py-[8px] px-[10px] flex justify-between ">
              <span>Menge</span>
              <div className="flex">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 12H18" stroke="#CBC9C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 19V5" stroke="#CBC9C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M5 12H19" stroke="#CBC9C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-             </div>
+                <div className="btn btn-ghost bg-transparent border-none p-0 py-0 rounded-full">
+                  <svg className="stroke-base-content" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 12H18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div className="btn btn-ghost p-0 rounded-full">
+                  <svg className="stroke-base-content" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 19V5"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 12H19"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
           </div>
           <div>
             <button className="btn btn-primary text-white text-xl font-bold w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem]"
