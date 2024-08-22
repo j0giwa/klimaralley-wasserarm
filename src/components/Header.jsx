@@ -54,7 +54,7 @@ function Header({ searchBar, categorys }) {
           <summary className="btn w-[45px] h-[40px] p-0 bg-transparent rounded-full border-none shadow-none">
             <img src="public/dummyPB.webp" className="rounded-full" alt="avatar icon" />
           </summary>
-          <ul className="flex flex-col justify-between menu dropdown-content w-[122px] h-28 px-[16px] py-[20px] z-50 bg-base-300 rounded-box">
+          <ul className="flex flex-col justify-between menu dropdown-content w-[122px] h-28 px-[16px] py-[20px] z-50 bg-base-200 rounded-box">
             <li>Edit Profile</li>
             <li>Home</li>
             <li>Logout</li>
