@@ -20,7 +20,7 @@ function Footer({ cartItems, onAdd, onRemove }) {
 
   return (
     <>
-      <div className="flex justify-between items-center px-7 py- fixed bottom-0 left-1/2 transform -translate-x-1/2 z-10 w-[374px] h-[60px] mx-[30px] my-[4px] bg-base-100/85 backdrop-blur-sm rounded-full border-base-100 dark:border-base-content dark:border-2">
+      <div className="flex justify-between items-center px-7 py- fixed bottom-0 left-1/2 transform -translate-x-1/2 z-10 w-[374px] h-[60px] mx-[30px] my-[4px] bg-base-300 backdrop-blur-sm rounded-full border-base-content border-2 dark:border-base-content dark:border-2">
         <div>
           <img src={shopIcon} alt="image of shop icon" />
         </div>

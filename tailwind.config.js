@@ -20,6 +20,7 @@ export default {
           "base-100": "#FFFFFF",
           "base-200": "#F1F5F9",
           "base-300": "#E2E8F0",
+          "base-cont": "#1F2937",
         },
       },
       "forest"
