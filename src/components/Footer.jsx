@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import ShoppingCart from "../components/ShoppingCart";
 import ingredientscart from "../../public/icons/Ingredients-icon.png"
 import shopIcon from "../../public/icons/Shop-icon.png"
 import storyIcon from "../../public/icons/Storytelling-icon.png"
+import { Link } from 'react-router-dom'
+import Cart from "../routes/Cart";
 
 /**
  * The Footer of the website and the functions
@@ -23,13 +25,19 @@ function Footer({ cartItems, onAdd, onRemove }) {
     <>
       <div className="flex justify-between items-center px-7 fixed bottom-0 left-1/2 -translate-x-1/2 z-10 w-[374px] h-[60px] mx-auto my-[4px] bg-base-300 backdrop-blur-sm rounded-full border-base-content border-2 dark:border-base-content dark:border-2">
         <div className="btn btn-ghost bg-transparent border-none px-1 mx-0 rounded-xl">
-          <img src={shopIcon} alt="image of shop icon" />
+          <Link to="/">
+            <img src={shopIcon} alt="image of shop icon" />
+          </Link>
         </div>
         <div className="btn btn-ghost bg-transparent border-none px-1 rounded-xl">
-          <img src={storyIcon} alt="image of story icon" />
+          <Link to="/story">
+            <img src={storyIcon} alt="image of story icon" />
+          </Link>
         </div>
-        <button className="btn bg-transparent border-none px-1 btn-ghost rounded-xl" onClick={togglePopup}>
-          <img src={ingredientscart} alt="icon of shopping cart" />
+        <button className="btn bg-transparent border-none px-1 btn-ghost rounded-xl">
+          <Link to={"./Cart"}>
+            <img src={ingredientscart} alt="icon of shopping cart" />
+          </Link>
         </button>
         {isOpen && (
           <div className="popup">
