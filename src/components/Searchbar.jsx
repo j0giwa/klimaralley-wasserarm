@@ -2,17 +2,17 @@ import search_icon from "../../public/images/search_icon.svg"
 
 /**
  * Header Searchbar UI Component
- * 
+ *
  * Provide the searchbar
  * @author R. Walter Dongmepi W.
  * @author Jonas Schwind
  */
 function Searchbar ({ categories }) {
-  
+
   return (
     <>
       <details className="dropdown">
-        <summary className="w-full  bg-inherit m-1 font-semibold text-[23px] border-none flex justify-between">
+        <summary className="w-full bg-inherit m-1 font-semibold text-[23px] border-none flex justify-between">
           <div>Kategorien</div>
           <div>
             <svg className="fill-base-content" width="24" height="24" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +27,7 @@ function Searchbar ({ categories }) {
           ))}
         </ul>
       </details>
-      <label class="input input-bordered flex items-center bg-base-200  gap-2 dark:border-base-content dark:border-2 rounded-full border-base-content border-2">
+      <label class="input input-bordered flex items-center bg-base-200 gap-2 rounded-full border-base-300 border-2">
         <input className="w-full h-12 rounded-full pl-6 pr-10 focus:none"
           type="search" name="search-fruits" id="" placeholder="Search" />
         <button >
@@ -40,7 +40,7 @@ function Searchbar ({ categories }) {
           </svg>
         </button>
       </label>
-    </> 
+    </>
   );
 }
 

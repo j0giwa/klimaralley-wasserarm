@@ -12,7 +12,7 @@ function ShopItem({ shopItem, onAdd }) {
   /**
    * Returns either a base64 encoded webp from the api,
    * or a fallback image.
-   * 
+   *
    * @param {String} icon icon from the api
    * @returns base64 api image, or path to fallback image if icon is null.
    */
@@ -24,7 +24,7 @@ function ShopItem({ shopItem, onAdd }) {
 
   return (
     <li>
-      <div className="card w-[184px] h-[313px] my-3 bg-base-300 border-base-content border-2 shadow-xl dark:border-base-content dark:border-2">
+      <div className="card w-[184px] h-[313px] my-3 bg-base-300 shadow-xl">
         <figure className="w-[184px] h-[145px] m-auto">
           <img className="object-cover" src={getIcon(shopItem.icon)} alt={shopItem.name} />
         </figure>

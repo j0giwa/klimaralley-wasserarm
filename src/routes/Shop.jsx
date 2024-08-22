@@ -12,7 +12,7 @@ import ShopItemListSkeleton from "../components/ShopItemListSkeleton";
  * @version 0.6.0
  */
 function Shop() {
-  
+
   /**
    * @typedef {'FRUIT' | 'VEGETABLE' | 'MEAT' | 'ANINAL_PRODUCT' | 'DRINK'} ItemType
    */
@@ -39,10 +39,10 @@ function Shop() {
 
   /**
    * Used for ui programming without backend connection.
-   * 
+   *
    * TODO: delete after
-   * 
-   * @type {ShopItem[]} 
+   *
+   * @type {ShopItem[]}
    */
   const fakeShopItems = [
     { id: 0, name: "Fake", type: "DRINK", water: 0, price: 0 },
@@ -98,10 +98,10 @@ function Shop() {
   }, []);
 
   /**
-   * Pares shopitems and returns all unique item-types (categorys) 
-   * 
-   * @param {*} items 
-   * @returns 
+   * Pares shopitems and returns all unique item-types (categorys)
+   *
+   * @param {*} items
+   * @returns
    */
   const getUniqueTypes = (items) => {
     const types = items.map(item => item.type);
@@ -111,7 +111,7 @@ function Shop() {
   /**
    * Looks if the item is already in the cart and if so will add the quantity.
    * Else it will add the item
-   * 
+   *
    * @param {ShopItem} shopItem
    */
   const onAdd = (shopItem) => {
@@ -130,7 +130,7 @@ function Shop() {
   /**
    * Looks if the item is only one and if so it will be removed complitly.
    * Else it will remove one from the quantity.
-   * 
+   *
    * @param {ShopItem} shopItem
    */
   const onRemove = (shopItem) => {
@@ -150,7 +150,7 @@ function Shop() {
         <Header searchBar={true} categorys={getUniqueTypes(shopItems)}/>
       </header>
       <main>
-        <div className="container container-main mx-auto mt-60 max-w-[834px]">
+        <div className="container container-main mx-auto mt-60 md:px-5">
           {loading && <ShopItemListSkeleton length={8}/> || <ShopItemList shopItems={shopItems} onAdd={onAdd} />}
         </div>
       </main>
