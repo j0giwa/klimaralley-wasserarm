@@ -150,7 +150,7 @@ function Shop() {
         <Header searchBar={true} categorys={getUniqueTypes(shopItems)}/>
       </header>
       <main>
-        <div className="container container-main mx-auto mt-60 md:px-5">
+        <div className="container container-main mx-auto mt-56 md:px-5">
           {loading && <ShopItemListSkeleton length={8}/> || <ShopItemList shopItems={shopItems} onAdd={onAdd} />}
         </div>
       </main>
