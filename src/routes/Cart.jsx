@@ -6,7 +6,7 @@ function Cart() {
     return (
         <div>
             <Header />
-            <ShoppingCart />
+           
         </div>
     )
 }

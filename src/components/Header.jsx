@@ -17,7 +17,7 @@ import ThemeController from './ThemeController';
 function Header({ searchBar, categorys }) {
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-20 w-full px-4 py-6 bg-base-100 dark:bg-base-100/40 dark:backdrop-blur-3xl">
+    <div className="fixed top-0 left-0 right-0 z-20 w-full px-4 py-6 bg-base-100 dark:bg-base-100/40 dark:backdrop-blur-3xl shadow-xl">
       <div className="flex items-center justify-between pb-6">
 
         {/* Language change */}
@@ -29,7 +29,7 @@ function Header({ searchBar, categorys }) {
                 <path d="M13 21.125C13.8975 21.125 14.625 20.3975 14.625 19.5C14.625 18.6025 13.8975 17.875 13 17.875C12.1025 17.875 11.375 18.6025 11.375 19.5C11.375 20.3975 12.1025 21.125 13 21.125Z"/>
             </svg>
           </summary>
-          <ul className="z-[9000] w-36 flex flex-col bg-base-200 backdrop-blur-3xl rounded-box dropdown-content px-3 py-5 gap-2">
+          <ul className="z-[9000] w-36 flex flex-col bg-base-200 backdrop-blur-3xl rounded-box dropdown-content px-3 py-5 gap-2 shadow-xl">
             <li className="w-fit flex gap-6">
               <span>Theme</span>
               <ThemeController />
@@ -54,7 +54,7 @@ function Header({ searchBar, categorys }) {
           <summary className="btn w-[45px] h-[40px] p-0 bg-transparent rounded-full border-none shadow-none">
             <img src="public/dummyPB.webp" className="rounded-full" alt="avatar icon" />
           </summary>
-          <ul className="flex flex-col justify-between menu dropdown-content w-[122px] h-28 px-[16px] py-[20px] z-50 bg-base-200 rounded-box">
+          <ul className="flex flex-col justify-between menu dropdown-content w-[122px] h-28 px-[16px] py-[20px] z-50 bg-base-200 rounded-box shadow-xl">
             <li>Edit Profile</li>
             <li>Home</li>
             <li>Logout</li>

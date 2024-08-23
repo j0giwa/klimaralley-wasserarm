@@ -5,6 +5,8 @@ import shopIcon from "../../public/icons/Shop-icon.png"
 import storyIcon from "../../public/icons/Storytelling-icon.png"
 import { Link } from 'react-router-dom'
 import Cart from "../routes/Cart";
+import Homepage from "../routes/Homepage";
+import Story from "../routes/Story";
 
 /**
  * The Footer of the website and the functions
@@ -34,11 +36,9 @@ function Footer({ cartItems, onAdd, onRemove }) {
             <img src={storyIcon} alt="image of story icon" />
           </Link>
         </div>
-        <button className="btn bg-transparent border-none px-1 btn-ghost rounded-xl">
-          <Link to={"./Cart"}>
-            <img src={ingredientscart} alt="icon of shopping cart" />
-          </Link>
-        </button>
+        <a className="btn bg-transparent border-none px-1 btn-ghost rounded-xl" href="/play/wasserarm/cart">
+          <img src={ingredientscart} alt="icon of shopping cart" />
+        </a>
         {isOpen && (
           <div className="popup">
             <ShoppingCart
