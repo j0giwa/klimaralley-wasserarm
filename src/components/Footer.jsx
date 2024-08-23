@@ -5,7 +5,6 @@ import shopIcon from "../../public/icons/Shop-icon.png"
 import storyIcon from "../../public/icons/Storytelling-icon.png"
 import { Link } from 'react-router-dom'
 import Cart from "../routes/Cart";
-import Homepage from "../routes/Homepage";
 import Story from "../routes/Story";
 
 /**
