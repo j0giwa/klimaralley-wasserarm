@@ -8,7 +8,7 @@ import App from './routes/App.jsx'
 import Shop from './routes/Shop.jsx'
 import Cart from './routes/Cart.jsx';
 import './index.css'
-import Homepage from './routes/Homepage.jsx';
+import Story from './routes/Story.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,9 +24,9 @@ const router = createBrowserRouter([
     element: <Cart />,
   },
   {
-    path:"/play/wasserarm/homepage",
-    element: <Homepage />
-  }
+    path:"/play/wasserarm/story",
+    element: <Story />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

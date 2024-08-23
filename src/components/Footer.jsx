@@ -24,15 +24,13 @@ function Footer({ cartItems, onAdd, onRemove }) {
 
   return (
     <>
-      <div className="flex justify-between items-center px-7 fixed bottom-0 left-1/2 -translate-x-1/2 z-10 w-[374px] h-[60px] mx-auto my-[4px] bg-base-200 backdrop-blur-sm rounded-full border-base-300 border-2">
+      <div className="flex justify-between items-center px-7 shadow-xl fixed bottom-0 left-1/2 -translate-x-1/2 z-10 w-[374px] h-[60px] mx-auto my-[4px] bg-base-200 backdrop-blur-sm rounded-full border-base-300 border-2">
         <a className="btn bg-transparent border-none px-1 btn-ghost rounded-xl" href="/play/wasserarm/" >
           <img src={shopIcon} alt="image of shop icon" />
         </a>
-        <div className="btn btn-ghost bg-transparent border-none px-1 rounded-xl">
-          <Link to="/story">
-            <img src={storyIcon} alt="image of story icon" />
-          </Link>
-        </div>
+        <a className="btn btn-ghost bg-transparent border-none px-1 rounded-xl" href="/play/wasserarm/story">
+          <img src={storyIcon} alt="image of story icon" />
+        </a>
         <a className="btn bg-transparent border-none px-1 btn-ghost rounded-xl" href="/play/wasserarm/cart">
           <img src={ingredientscart} alt="icon of shopping cart" />
         </a>

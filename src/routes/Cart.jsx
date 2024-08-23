@@ -6,8 +6,7 @@ function Cart() {
   return (
     <div>
       <Header />
-      <ShoppingCart />
     </div>
   )
 }
-export default Cart();
+export default Cart;
