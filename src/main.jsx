@@ -8,6 +8,7 @@ import App from './routes/App.jsx'
 import Shop from './routes/Shop.jsx'
 import Cart from './routes/Cart.jsx';
 import './index.css'
+import Homepage from './routes/Homepage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path:"/play/wasserarm/cart",
     element: <Cart />,
+  },
+  {
+    path:"/play/wasserarm/homepage",
+    element: <Homepage />
   }
 ]);
 
