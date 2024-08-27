@@ -1,5 +1,6 @@
-import SearchBar from './Searchbar';
-import ThemeController from './ThemeController';
+import { useState } from "react";
+import SearchBar from "./Searchbar";
+import ThemeController from "./ThemeController";
 
 /**
  * Header UI Component
@@ -15,57 +16,121 @@ import ThemeController from './ThemeController';
  * @author Jonas Schwind
  */
 function Header({ searchBar, categorys }) {
+  // Language icon
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+
+  const toggleLanguageDropdown = () => {
+    setIsLanguageOpen(!isLanguageOpen);
+  };
+
+  const handleLanguageClick = (language) => {
+    // Handle language change or actions here
+    setIsLanguageOpen(false);
+  };
+
+  // Profile icon
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const toggleProfileDropdown = () => {
+    setIsProfileOpen(!isProfileOpen);
+  };
+
+  const handleProfileClick = (option) => {
+    // Handle navigation or actions here
+    setIsProfileOpen(false);
+  };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-20 w-full px-4 py-6 bg-base-100 dark:bg-base-100/40 dark:backdrop-blur-3xl shadow-xl">
-      <div className="flex items-center justify-between pb-6">
-
-        {/* Language change */}
-        <details className="dropdown">
-          <summary className="btn w-[35px] h-[35px] px-0 bg-transparent border-none shadow-none">
-            <svg className='fill-base-content' width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13 8.125C13.8975 8.125 14.625 7.39746 14.625 6.5C14.625 5.60254 13.8975 4.875 13 4.875C12.1025 4.875 11.375 5.60254 11.375 6.5C11.375 7.39746 12.1025 8.125 13 8.125Z"/>
-                <path d="M13 14.625C13.8975 14.625 14.625 13.8975 14.625 13C14.625 12.1025 13.8975 11.375 13 11.375C12.1025 11.375 11.375 12.1025 11.375 13C11.375 13.8975 12.1025 14.625 13 14.625Z"/>
-                <path d="M13 21.125C13.8975 21.125 14.625 20.3975 14.625 19.5C14.625 18.6025 13.8975 17.875 13 17.875C12.1025 17.875 11.375 18.6025 11.375 19.5C11.375 20.3975 12.1025 21.125 13 21.125Z"/>
-            </svg>
-          </summary>
-          <ul className="z-[9000] w-36 flex flex-col bg-base-200 backdrop-blur-3xl rounded-box dropdown-content px-3 py-5 gap-2 shadow-xl">
-            <li className="w-fit flex gap-6">
-              <span>Theme</span>
-              <ThemeController />
-            </li>
-            <li className="w-full flex justify-between">
-              <span>Sprache</span>
-              <svg width="24" height="24" viewBox="0 0 16 17" className='fill-base-content' xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.17541 10.6763H2.00291C1.53558 10.6759 1.0875 10.4843 0.757043 10.1436C0.42659 9.80289 0.240779 9.34091 0.240405 8.85908V2.31719C0.240779 1.83536 0.42659 1.37337 0.757043 1.03267C1.0875 0.691962 1.53558 0.500385 2.00291 0.5H8.34792C8.81525 0.500385 9.26333 0.691962 9.59378 1.03267C9.92424 1.37337 10.11 1.83536 10.1104 2.31719V5.58813H9.40542V2.31719C9.40505 2.02814 9.29351 1.75104 9.09527 1.54665C8.89703 1.34226 8.62827 1.22726 8.34792 1.22688H2.00291C1.72256 1.22726 1.45379 1.34226 1.25555 1.54665C1.05731 1.75104 0.94578 2.02814 0.945407 2.31719V8.85908C0.94578 9.14813 1.05731 9.42523 1.25555 9.62962C1.45379 9.83401 1.72256 9.94901 2.00291 9.94939H5.17541V10.6763ZM5.14862 7.17927C4.36511 7.80646 3.45945 8.25177 2.49359 8.48474L2.32298 7.77967C3.16069 7.57759 3.94859 7.19839 4.63679 6.66609C3.80238 5.75935 3.22921 4.63105 2.98145 3.40751H2.35541V2.68063H4.66711L4.28359 2.28521L4.78202 1.77131L5.66327 2.68063H7.99542V3.40751H7.35105C7.17593 4.22068 6.86433 4.99605 6.43031 5.69862C5.84158 6.01404 5.38518 6.54072 5.14721 7.17927H5.14862ZM5.17118 6.174C5.88879 5.4036 6.3915 4.44785 6.62631 3.40751H3.71042C3.94727 4.4483 4.4519 5.404 5.17118 6.174ZM15.7504 14.6356V8.17073C15.753 7.92854 15.7091 7.68823 15.6212 7.46362C15.5333 7.23902 15.4032 7.03458 15.2383 6.86207C15.0734 6.68957 14.877 6.55242 14.6605 6.45853C14.444 6.36463 14.2116 6.31586 13.9766 6.31501H7.68028C7.2031 6.31559 6.74562 6.51128 6.4082 6.85917C6.07078 7.20706 5.88097 7.67874 5.88041 8.17073V14.6356C5.88097 15.1276 6.07078 15.5992 6.4082 15.9471C6.74562 16.295 7.2031 16.4907 7.68028 16.4913H13.9506C14.4277 16.4907 14.8852 16.295 15.2226 15.9471C15.5601 15.5992 15.7499 15.1276 15.7504 14.6356ZM13.9766 7.04189C14.26 7.04208 14.5318 7.15824 14.7322 7.36485C14.9326 7.57146 15.0452 7.85164 15.0454 8.14383V14.6625C15.0452 14.9547 14.9326 15.2348 14.7322 15.4414C14.5318 15.648 14.26 15.7642 13.9766 15.7644H7.6542C7.3708 15.7642 7.09906 15.648 6.89866 15.4414C6.69827 15.2348 6.5856 14.9547 6.58542 14.6625V8.14383C6.5856 7.85164 6.69827 7.57146 6.89866 7.36485C7.09906 7.15824 7.3708 7.04208 7.6542 7.04189H13.9766ZM12.506 12.8569H9.12483L8.30773 14.4778L7.6831 14.1435L10.8154 7.92504L13.9477 14.1435L13.3231 14.4778L12.506 12.8569ZM12.1394 12.13L10.8154 9.50236L9.49143 12.13H12.1394ZM3.76541 15.7717C3.39163 15.7711 3.03331 15.6177 2.76901 15.3452C2.5047 15.0727 2.35597 14.7033 2.35541 14.3179V12.6439L3.51584 13.8404L4.01428 13.3265L2.00714 11.2578L0 13.3265L0.498436 13.8404L1.65041 12.6534V14.3194C1.65097 14.8975 1.87398 15.4518 2.2705 15.8607C2.66702 16.2695 3.20465 16.4994 3.76541 16.5H5.2163V15.7731L3.76541 15.7717ZM15.5009 3.15092L14.3404 4.34736V2.68063C14.3399 2.10247 14.1169 1.54815 13.7203 1.13933C13.3238 0.730507 12.7862 0.500577 12.2254 0.5H10.8154V1.22688H12.2254C12.5992 1.22745 12.9575 1.3808 13.2218 1.65331C13.4861 1.92581 13.6349 2.29525 13.6354 2.68063V4.33863L12.4835 3.15019L11.985 3.66409L13.9922 5.73424L16 3.66409L15.5009 3.15092Z" />
-              </svg>
-            </li>
-          </ul>
-        </details>
+    <div className="z-20 fixed top-0 left-0 right-0  w-full px-[16px] py-[24px] bg-base-100 dark:bg-base-100/60 dark:backdrop-blur-3xl">
+      <div className="flex items-center justify-between">
+        {/* Language */}
+        <div className="relative">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="fill-base-content cursor-pointer"
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            onClick={toggleLanguageDropdown}
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8.00018 15H3.50018C2.8373 14.9995 2.20172 14.7359 1.733 14.2672C1.26427 13.7985 1.00071 13.1629 1.00018 12.5V3.5C1.00071 2.83712 1.26427 2.20154 1.733 1.73282C2.20172 1.26409 2.8373 1.00053 3.50018 1H12.5002C13.1631 1.00053 13.7986 1.26409 14.2674 1.73282C14.7361 2.20154 14.9997 2.83712 15.0002 3.5V8H14.0002V3.5C13.9997 3.10234 13.8414 2.72111 13.5603 2.43992C13.2791 2.15873 12.8978 2.00053 12.5002 2H3.50018C3.10252 2.00053 2.72129 2.15873 2.4401 2.43992C2.15891 2.72111 2.00071 3.10234 2.00018 3.5V12.5C2.00071 12.8977 2.15891 13.2789 2.4401 13.5601C2.72129 13.8413 3.10252 13.9995 3.50018 14H8.00018V15ZM7.96218 10.189C6.85081 11.0519 5.56619 11.6645 4.19618 11.985L3.95418 11.015C5.14242 10.737 6.26 10.2153 7.23618 9.483C6.05261 8.23555 5.23961 6.68329 4.88818 5H4.00018V4H7.27918L6.73518 3.456L7.44218 2.749L8.69218 4H12.0002V5H11.0862C10.8378 6.11872 10.3958 7.18544 9.78018 8.152C8.9451 8.58595 8.29772 9.31052 7.96018 10.189H7.96218ZM7.99418 8.806C9.01206 7.74613 9.72512 6.43125 10.0582 5H5.92218C6.25813 6.43187 6.97392 7.74667 7.99418 8.806ZM23.0002 20.447V11.553C23.0039 11.2198 22.9416 10.8892 22.8169 10.5802C22.6922 10.2712 22.5076 9.98994 22.2738 9.75262C22.0399 9.5153 21.7613 9.32661 21.4542 9.19744C21.1471 9.06827 20.8174 9.00117 20.4842 9H11.5532C10.8763 9.00079 10.2274 9.27003 9.74881 9.74863C9.2702 10.2272 9.00097 10.8761 9.00018 11.553V20.447C9.00097 21.1239 9.2702 21.7728 9.74881 22.2514C10.2274 22.73 10.8763 22.9992 11.5532 23H20.4472C21.124 22.9992 21.7729 22.73 22.2515 22.2514C22.7302 21.7728 22.9994 21.1239 23.0002 20.447ZM20.4842 10C20.8862 10.0003 21.2716 10.1601 21.5559 10.4443C21.8401 10.7286 21.9999 11.114 22.0002 11.516V20.484C21.9999 20.886 21.8401 21.2714 21.5559 21.5557C21.2716 21.8399 20.8862 21.9997 20.4842 22H11.5162C11.1142 21.9997 10.7287 21.8399 10.4445 21.5557C10.1603 21.2714 10.0004 20.886 10.0002 20.484V11.516C10.0004 11.114 10.1603 10.7286 10.4445 10.4443C10.7287 10.1601 11.1142 10.0003 11.5162 10H20.4842ZM18.3982 18H13.6022L12.4432 20.23L11.5572 19.77L16.0002 11.215L20.4432 19.77L19.5572 20.23L18.3982 18ZM17.8782 17L16.0002 13.385L14.1222 17H17.8782ZM6.00018 22.01C5.46999 22.0092 4.96174 21.7982 4.58684 21.4233C4.21194 21.0484 4.00097 20.5402 4.00018 20.01V17.707L5.64618 19.353L6.35318 18.646L3.50618 15.8L0.65918 18.646L1.36618 19.353L3.00018 17.72V20.012C3.00097 20.8074 3.3173 21.57 3.87974 22.1324C4.44217 22.6949 5.20477 23.0112 6.00018 23.012H8.05818V22.012L6.00018 22.01ZM22.6462 4.647L21.0002 6.293V4C20.9994 3.20459 20.6831 2.44199 20.1206 1.87956C19.5582 1.31712 18.7956 1.00079 18.0002 1H16.0002V2H18.0002C18.5304 2.00079 19.0386 2.21176 19.4135 2.58666C19.7884 2.96156 19.9994 3.46981 20.0002 4V6.281L18.3662 4.646L17.6592 5.353L20.5062 8.201L23.3542 5.353L22.6462 4.647Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          {isLanguageOpen && (
+            <div className="z-[1000] absolute left-0 mt-2 w-48 border rounded bg-base-100">
+              <ul className="text-sm">
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleLanguageClick("Englisch")}
+                >
+                  Englisch
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleLanguageClick("Deutsch")}
+                >
+                  Deutsch
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
 
         {/* Money */}
-        <div className="flex justify-between w-[95px] p-2.5 bg-base-200 border-2 border-base-300 rounded-full">
+        <div className="flex justify-between w-[95px] p-[15px] bg-base-200 border-2 border-base-300 rounded-full">
+          {/*make dynamic coin counter*/}
           <p>500</p>
-          <span>🪙</span>
+          <img
+            className="h-[23px]"
+            src="public/icons/coin.png"
+            alt="Coins"
+          ></img>
         </div>
 
         {/* Profile */}
-        <details className="dropdown dropdown-end">
-          <summary className="btn w-[45px] h-[40px] p-0 bg-transparent rounded-full border-none shadow-none">
-            <img src="public/dummyPB.webp" className="rounded-full" alt="avatar icon" />
-          </summary>
-          <ul className="flex flex-col justify-between menu dropdown-content w-[122px] h-28 px-[16px] py-[20px] z-50 bg-base-200 rounded-box shadow-xl">
-            <li>Edit Profile</li>
-            <li>Home</li>
-            <li>Logout</li>
-          </ul>
-        </details>
+        <div className="relative">
+          <img
+            src="public/icons/dummyPB.webp"
+            alt="Profile picture"
+            className="w-[40px] h-[40px] p-[1px] border border-base-300 rounded-full cursor-pointer"
+            onClick={toggleProfileDropdown}
+          />
+          {isProfileOpen && (
+            <div className="z-[1000] absolute right-0 mt-2 w-48 border rounded bg-base-100">
+              <ul className="text-sm">
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleProfileClick("editProfile")}
+                >
+                  Edit Profile
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleProfileClick("home")}
+                >
+                  Home
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+                  onClick={() => handleProfileClick("logout")}
+                >
+                  Logout
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
+      {/*Searchbar*/}
       {searchBar && (
-        <div className="flex-col">
+        <div className="flex-col px-4 pb-6 ">
           <SearchBar categories={categorys} />
         </div>
       )}
+      <ThemeController />
     </div>
   );
 }
