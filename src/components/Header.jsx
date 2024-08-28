@@ -37,6 +37,10 @@ function Header({ searchBar, categorys }) {
 
   const handleProfileClick = (option) => {
     // Handle navigation or actions here
+    if (option === "Problem melden") {
+      window.location.href =
+        "mailto:support@example.com?subject=Problem melden&body=Please describe the issue you are facing.";
+    }
     setIsProfileOpen(false);
   };
 
@@ -93,32 +97,32 @@ function Header({ searchBar, categorys }) {
         {/* Profile */}
         <div className="relative">
           <img
-            src="public/icons/dummyPB.webp"
+            src="icons/dummyPB.webp"
             alt="Profile picture"
             className="w-[40px] h-[40px] p-[1px] border border-base-300 rounded-full cursor-pointer"
             onClick={toggleProfileDropdown}
           />
           {isProfileOpen && (
             <div className="z-[1000] absolute right-0 mt-2 w-48 border rounded bg-base-100">
-              <ul className="text-sm">
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <ul className="text-sm cursor-pointer">
+                <li className="px-3 py-2 ">
                   <ThemeController />
                 </li>
                 <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleProfileClick("editProfile")}
-                >
-                  Edit Profile
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleProfileClick("home")}
+                  className="px-4 py-2"
+                  onClick={() => handleProfileClick("Home")}
                 >
                   Home
                 </li>
                 <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
-                  onClick={() => handleProfileClick("logout")}
+                  className="px-4 py-2  text-red-600"
+                  onClick={() => handleProfileClick("Problem melden")}
+                >
+                  Problem melden
+                </li>
+                <li
+                  className="px-4 py-2 bg-error"
+                  onClick={() => handleProfileClick("Logout")}
                 >
                   Logout
                 </li>
