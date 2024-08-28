@@ -101,6 +101,9 @@ function Header({ searchBar, categorys }) {
           {isProfileOpen && (
             <div className="z-[1000] absolute right-0 mt-2 w-48 border rounded bg-base-100">
               <ul className="text-sm">
+                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                  <ThemeController />
+                </li>
                 <li
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   onClick={() => handleProfileClick("editProfile")}
@@ -126,11 +129,10 @@ function Header({ searchBar, categorys }) {
       </div>
       {/*Searchbar*/}
       {searchBar && (
-        <div className="flex-col px-4 pb-6 ">
+        <div className="flex-col px-4 ">
           <SearchBar categories={categorys} />
         </div>
       )}
-      <ThemeController />
     </div>
   );
 }
