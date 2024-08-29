@@ -1,13 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import Speechbubble from "../lib/Speechbubble";
+import map from "/images/map.jpeg";
 
 function Story() {
-  const [isVisible, setIsVisible] = useState(true);
-
-  const toggleVisibility = () => {
-    setIsVisible(!isVisible);
-  };
+  const [welcome, setWelcome] = useState(false);
 
   const [count, setCount] = useState(0);
 
@@ -19,7 +16,11 @@ function Story() {
   };
 
   const plusCount = () => {
-    setCount(count + 1);
+    if (count >= 10) {
+      setGameStart(true);
+    } else {
+      setCount(count + 1);
+    }
   };
   
   let forward
@@ -37,25 +38,33 @@ if (count===7) {
 }
   const bubble = Speechbubble.find((content) => content.index === count);
 
+  const [gameStart, setGameStart] = useState(true);
+
   return (
+    // background map
     <div className="relative bg-base-200 dark:bg-map-background dark:bg-no-repeat dark:bg-fixed dark:bg-center dark:bg-cover dark:h-screen">
-      <img
-        src="images/map.jpeg"
-        alt="Karte"
-        className="h-[calc(100dvh)] w-full opacity-50"
-      ></img>
+      {!gameStart ? (
+        <img
+          src={map}
+          alt="Karte"
+          className="h-[calc(100dvh)] w-full opacity-50"
+        ></img>
+      ) : (
+        <img src={map} alt="Karte" className="h-[calc(100dvh)] w-full"></img>
+      )}
       {/* Foreground */}
       <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-        {isVisible && (
+        {welcome && (
           <button
             className="text-2xl bg-white p-3 rounded"
-            onClick={toggleVisibility}
+            onClick={() => setWelcome(false)}
           >
             Willkommen zur Spielerklärung
           </button>
         )}
       </div>
-      {!isVisible && (
+      {/* Game explaination starts*/}
+      {!welcome && !gameStart && (
         <div>
           {/* Bubble */}
           <div className="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center">
@@ -78,7 +87,7 @@ if (count===7) {
               className="w-1/2 sm:w-1/3"
             ></img>
           </div>
-          {/* Counter */}
+          {/* Counter for speechbubble*/}
           <div className="absolute top-3/4 bottom-0 left-0 right-1/3  flex items-center justify-center">
             <button className="btn-ghost hover:rounded" onClick={minusCount}>
               <svg width="40" height="40" viewBox="0 0 40 40" fill="base-content" xmlns="http://www.w3.org/2000/svg">
@@ -90,7 +99,37 @@ if (count===7) {
           <div className="absolute top-3/4 bottom-0 left-1/3 right-0  flex items-center justify-center w-32">
             {forward}
           </div>
-          <p>{count}</p>
+        </div>
+      )}
+      {/* Game is explained when player clicked through 
+      the explaination (count >= 10) => Game starts */}
+      {gameStart && (
+        <div className="absolute top-0 bottom-0 left-0 right-0 grid grid-cols-5">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+          <div>Item 4</div>
+          <div>Item 5</div>
+          <div></div>
+          <div>Item 7</div>
+          <div>Item 8</div>
+          <div>Item 9</div>
+          <div>Item 10</div>
+          <div>Item 11</div>
+          <div>Item 12</div>
+          <div>Item 13</div>
+          <div>Item 14</div>
+          <div>Item 15</div>
+          <div>Item 16</div>
+          <div>Item 17</div>
+          <div>Item 18</div>
+          <div>Item 19</div>
+          <div>Item 20</div>
+          <div>Item 21</div>
+          <div>Item 22</div>
+          <div>Item 23</div>
+          <div>Item 24</div>
+          <div>Item 25</div>
         </div>
       )}
     </div>
