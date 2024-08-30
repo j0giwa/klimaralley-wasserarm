@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SearchBar from "./Searchbar";
 import ThemeController from "./ThemeController";
+import coinIcon from "../../public/icons/coin.png"
 
 /**
  * Header UI Component
@@ -89,7 +90,7 @@ function Header({ searchBar, categorys }) {
           <p>500</p>
           <img
             className="h-[23px]"
-            src="public/icons/coin.png"
+            src= { coinIcon }
             alt="Coins"
           ></img>
         </div>

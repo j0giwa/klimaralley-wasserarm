@@ -44,6 +44,8 @@ function Shop() {
    *
    * @type {ShopItem[]}
    */
+
+  /*
   const fakeShopItems = [
     { id: 0, name: "Fake", type: "DRINK", water: 0, price: 0 },
     { id: 1, name: "Fake Röstkaffe", type: "DRINK", water: 21000, price: 50 },
@@ -78,6 +80,7 @@ function Shop() {
     { id: 30, name: "Fake Tomatenmark", type: "DRINK", water: 855, price: 30 },
     { id: 31, name: "Fake Butter", type: "DRINK", water: 553, price: 40 },
   ];
+  */
 
   useEffect(() => {
     document.title = "Shop | Wasserarmsatt";
@@ -92,8 +95,8 @@ function Shop() {
         console.error(err.message);
 
         // Devtest Fallback
-        setLoading(false); //TODO: Delete after
-        setShopItems(fakeShopItems); //TODO: Delete after
+        //setLoading(false); //TODO: Delete after
+        //setShopItems(fakeShopItems); //TODO: Delete after
       });
   }, []);
 
