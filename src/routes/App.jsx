@@ -72,9 +72,9 @@ function App() {
           <div>
             <span className="text-xl text-base-content font-bold">Vorschläge</span>
             <div className="flex flex-col justify-between gap-4 pt-4">
-              <div><img src={meat} alt="image of meat" className="w-full h-52"/></div>
-              <div><img src={cake} alt="image of cake" className="w-full h-52"/></div>
-              <div><img src={salad} alt="image of salad" className="w-full h-52"/></div>
+              <div><img src={meat} alt="image of meat" className="w-full m-h-52"/></div>
+              <div><img src={cake} alt="image of cake" className="w-full m-h-52"/></div>
+              <div><img src={salad} alt="image of salad" className="w-full m-h-52"/></div>
             </div>
           </div>
         </div>
