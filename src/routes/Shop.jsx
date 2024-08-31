@@ -12,7 +12,7 @@ import ShopItemListSkeleton from "../components/ShopItemListSkeleton";
  * @version 0.6.0
  */
 function Shop() {
-  
+
   /**
    * @typedef {'FRUIT' | 'VEGETABLE' | 'MEAT' | 'ANINAL_PRODUCT' | 'DRINK'} ItemType
    */
@@ -39,11 +39,13 @@ function Shop() {
 
   /**
    * Used for ui programming without backend connection.
-   * 
+   *
    * TODO: delete after
-   * 
-   * @type {ShopItem[]} 
+   *
+   * @type {ShopItem[]}
    */
+
+  /*
   const fakeShopItems = [
     { id: 0, name: "Fake", type: "DRINK", water: 0, price: 0 },
     { id: 1, name: "Fake Röstkaffe", type: "DRINK", water: 21000, price: 50 },
@@ -78,6 +80,7 @@ function Shop() {
     { id: 30, name: "Fake Tomatenmark", type: "DRINK", water: 855, price: 30 },
     { id: 31, name: "Fake Butter", type: "DRINK", water: 553, price: 40 },
   ];
+  */
 
   useEffect(() => {
     document.title = "Shop | Wasserarmsatt";
@@ -92,16 +95,16 @@ function Shop() {
         console.error(err.message);
 
         // Devtest Fallback
-        setLoading(false); //TODO: Delete after
-        setShopItems(fakeShopItems); //TODO: Delete after
+        //setLoading(false); //TODO: Delete after
+        //setShopItems(fakeShopItems); //TODO: Delete after
       });
   }, []);
 
   /**
-   * Pares shopitems and returns all unique item-types (categorys) 
-   * 
-   * @param {*} items 
-   * @returns 
+   * Pares shopitems and returns all unique item-types (categorys)
+   *
+   * @param {*} items
+   * @returns
    */
   const getUniqueTypes = (items) => {
     const types = items.map(item => item.type);
@@ -111,7 +114,7 @@ function Shop() {
   /**
    * Looks if the item is already in the cart and if so will add the quantity.
    * Else it will add the item
-   * 
+   *
    * @param {ShopItem} shopItem
    */
   const onAdd = (shopItem) => {
@@ -130,7 +133,7 @@ function Shop() {
   /**
    * Looks if the item is only one and if so it will be removed complitly.
    * Else it will remove one from the quantity.
-   * 
+   *
    * @param {ShopItem} shopItem
    */
   const onRemove = (shopItem) => {
@@ -150,8 +153,8 @@ function Shop() {
         <Header searchBar={true} categorys={getUniqueTypes(shopItems)}/>
       </header>
       <main>
-        <div className="container container-main mx-auto mt-60 max-w-[834px]">
-          {loading && <ShopItemListSkeleton length={8}/> || <ShopItemList shopItems={shopItems} onAdd={onAdd} />}
+        <div className="container container-main mx-auto mt-56 md:px-5">
+          {loading && <ShopItemListSkeleton length={14}/> || <ShopItemList shopItems={shopItems} onAdd={onAdd} />}
         </div>
       </main>
       <Footer

@@ -30,7 +30,7 @@ function ThemeController() {
   }, [isdark]);
   
   return (
-    <label className="grid cursor-pointer place-items-center">
+    <label className="grid cursor-pointer place-items-center w-1">
       <input type="checkbox" className="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1"
         value="forest" checked={isdark} onChange={() => setIsdark(!isdark)} />
       <svg className="stroke-base-100 fill-base-100 col-start-1 row-start-1"
