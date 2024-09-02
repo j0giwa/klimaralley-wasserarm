@@ -3,9 +3,6 @@ import ShoppingCart from "../components/ShoppingCart";
 import ingredientscart from "../../public/icons/Ingredients-icon.png"
 import shopIcon from "../../public/icons/Shop-icon.png"
 import storyIcon from "../../public/icons/Storytelling-icon.png"
-import { Link } from 'react-router-dom'
-import Cart from "../routes/Cart";
-import Story from "../routes/Story";
 
 /**
  * The Footer of the website and the functions
@@ -31,17 +28,9 @@ function Footer({ cartItems, onAdd, onRemove }) {
         <a className="btn btn-ghost bg-transparent border-none px-1 rounded-xl" href="/play/wasserarm/story">
           <img src={storyIcon} alt="image of story icon" />
         </a>
-        <a className="btn bg-transparent border-none px-1 btn-ghost rounded-xl" href="/play/wasserarm/cart">
+        <a className="btn bg-transparent border-none px-1 btn-ghost rounded-xl" href="/play/wasserarm/Cart">
           <img src={ingredientscart} alt="icon of shopping cart" />
         </a>
-        {isOpen && (
-          <div className="popup">
-            <ShoppingCart
-              cartItems={cartItems}
-              onAdd={onAdd}
-              onRemove={onRemove} />
-          </div>
-        )}
       </div>
     </>
   );
