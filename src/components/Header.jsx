@@ -1,7 +1,8 @@
 import { useState } from "react";
 import SearchBar from "./Searchbar";
 import ThemeController from "./ThemeController";
-import coinIcon from "../../public/icons/coin.png"
+import coin from "/icons/coin.png";
+import dummyPB from "/icons/dummyPB.webp";
 
 /**
  * Header UI Component
@@ -88,17 +89,13 @@ function Header({ searchBar, categorys }) {
         <div className="flex justify-between w-[95px] p-[15px] bg-base-200 border-2 border-base-300 rounded-full">
           {/*make dynamic coin counter*/}
           <p>500</p>
-          <img
-            className="h-[23px]"
-            src= { coinIcon }
-            alt="Coins"
-          ></img>
+          <img className="h-[23px]" src={coin} alt="Coins"></img>
         </div>
 
         {/* Profile */}
         <div className="relative">
           <img
-            src="icons/dummyPB.webp"
+            src={dummyPB}
             alt="Profile picture"
             className="w-[40px] h-[40px] p-[1px] border border-base-300 rounded-full cursor-pointer"
             onClick={toggleProfileDropdown}

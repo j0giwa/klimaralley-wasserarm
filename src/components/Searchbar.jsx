@@ -21,7 +21,7 @@ function Searchbar ({ categories }) {
             </svg>
           </div>
         </summary>
-        <ul className="menu dropdown-content bg-base-300 border-base-content border-2 backdrop-blur-3xl rounded-box z-[1] w-52 p-2 shadow">
+        <ul className="menu dropdown-content bg-base-100 border backdrop-blur-3xl z-[1] w-52 p-2 shadow">
           {categories.map((type, index) => (
             <li key={index}>{type}</li>
           ))}

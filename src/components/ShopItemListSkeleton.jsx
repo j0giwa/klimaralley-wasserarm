@@ -3,7 +3,7 @@
 /**
  * Skeleton Placeholder of the ShopItemList to display while Shop page is loading.
  *
- * @param {Object} ShopItemListSkeleton 
+ * @param {Object} ShopItemListSkeleton
  * @param {number} ShopItemListSkeleton.length
  * @author Jonas Schwind
  * @version 1.0.0
@@ -14,7 +14,7 @@ function ShopItemListSkeleton({length}) {
     <ul className="flex flex-wrap justify-around py-4">
       {Array(length).fill(0).map((item, i) =>
       <li key={i}>
-          <div className="card w-[184px] h-[313px] my-3 bg-base-200 shadow-xl">
+        <div className="card w-[184px] h-[313px] my-3 bg-base-200 shadow-xl lg:mx-2">
           <figure className="w-[184px] h-[145px] m-auto skeleton skeleton-wave">
             <div className="skeleton w-full h-full bg-base-300"></div>
           </figure>
