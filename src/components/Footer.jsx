@@ -1,8 +1,8 @@
 import { useState, React } from "react";
 import ShoppingCart from "../components/ShoppingCart";
-import ingredientscart from "/icons/Ingredients-icon.png";
-import shopIcon from "/icons/Shop-icon.png";
-import storyIcon from "/icons/Storytelling-icon.png";
+import ingredientscart from "/icons/Ingredients.svg";
+import shopIcon from "/icons/Shop.svg";
+import storyIcon from "/icons/Storytelling.svg";
 import { Link } from "react-router-dom";
 import Cart from "../routes/Cart";
 import Story from "../routes/Story";
@@ -15,12 +15,7 @@ import Story from "../routes/Story";
  * @author R. Walter Dongmepi W.
  * @version 0.5.0
  */
-function Footer({ cartItems, onAdd, onRemove }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
+function Footer() {
 
   return (
     <>
@@ -43,15 +38,6 @@ function Footer({ cartItems, onAdd, onRemove }) {
         >
           <img src={ingredientscart} alt="icon of shopping cart" />
         </a>
-        {isOpen && (
-          <div className="popup">
-            <ShoppingCart
-              cartItems={cartItems}
-              onAdd={onAdd}
-              onRemove={onRemove}
-            />
-          </div>
-        )}
       </div>
     </>
   );

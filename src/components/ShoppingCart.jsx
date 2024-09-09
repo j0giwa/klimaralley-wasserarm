@@ -1,5 +1,6 @@
 import React from 'react';
 import CartItem from './CartItem';
+import { useShopContext } from '../lib/context';
 
 /**
  * Functions of the shopping card
@@ -8,7 +9,11 @@ import CartItem from './CartItem';
  * @author Jonas Schwind
  * @version 0.6.0
  */
-function ShoppingCart({ cartItems, onAdd, onRemove }) {
+function ShoppingCart() {
+
+ /*  const { cartItems, onAdd, onRemove } = useContext(ShopContext) */
+     const {shop:{cartItems}, onAdd, onRemove} = useShopContext()  
+
 
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const totalWater = cartItems.reduce((a, c) => a + c.water * c.qty, 0);

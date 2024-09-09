@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ShopItemList from "../components/ShopItemList";
 import ShopItemListSkeleton from "../components/ShopItemListSkeleton";
+import Cart from "./Cart";
+import { ShopContext, useShopContext } from "../lib/context"
 
 /**
  * Shop page (main part) of the wasserarm-satt game
@@ -29,13 +31,15 @@ function Shop() {
    */
 
   /** @type {ShopItem[]} */
-  const [shopItems, setShopItems] = useState([]);
+  /* const [shopItems, setShopItems] = useState([]); */
 
   /** @type {ShopItem[]} */
-  const [cartItems, setCartItems] = useState([]);
+ /*  const [cartItems, setCartItems] = useState([]); */
 
   /** @type {boolean} */
   const [loading, setLoading] = useState(true);
+
+  const {shop:{shopItems}, onAdd} = useShopContext()
 
   /**
    * Used for ui programming without backend connection.
@@ -117,7 +121,7 @@ function Shop() {
    *
    * @param {ShopItem} shopItem
    */
-  const onAdd = (shopItem) => {
+  /* const onAdd = (shopItem) => {
     const exist = cartItems.find((x) => x.id === shopItem.id);
     if (exist) {
       setCartItems(
@@ -128,7 +132,7 @@ function Shop() {
     } else {
       setCartItems([...cartItems, { ...shopItem, qty: 1 }]);
     }
-  };
+  }; */
 
   /**
    * Looks if the item is only one and if so it will be removed complitly.
@@ -136,7 +140,7 @@ function Shop() {
    *
    * @param {ShopItem} shopItem
    */
-  const onRemove = (shopItem) => {
+  /* const onRemove = (shopItem) => {
     const exist = cartItems.find((x) => x.id === shopItem.id);
     if (exist.qty === 1) {
       setCartItems(cartItems.filter((x) => x.id !== shopItem.id));
@@ -145,7 +149,7 @@ function Shop() {
       )
       );
     }
-  };
+  }; */
 
   return (
     <div className="bg-base-200 dark:bg-map-background dark:bg-no-repeat dark:bg-fixed dark:bg-center dark:bg-cover">
@@ -157,10 +161,7 @@ function Shop() {
           {loading && <ShopItemListSkeleton length={14}/> || <ShopItemList shopItems={shopItems} onAdd={onAdd} />}
         </div>
       </main>
-      <Footer
-        cartItems={cartItems}
-        onAdd={onAdd}
-        onRemove={onRemove} />
+      <Footer />
     </div>
   );
 }
