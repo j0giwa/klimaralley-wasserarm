@@ -1,4 +1,5 @@
 import { useShopContext } from '../lib/context';
+import missing_texture from "/missing_textures.webp";
 
 /**
  * Cartitem UI component
@@ -9,12 +10,26 @@ import { useShopContext } from '../lib/context';
  */
 function CartItem({ cartItems }){
 
-  const { onAdd, onRemove } = useShopContext()
+  const { onAdd, onRemove } = useShopContext();
+
+  /**
+   * Returns either a base64 encoded webp from the api,
+   * or a fallback image.
+   *
+   * @param {String} icon icon from the api
+   * @returns base64 api image, or path to fallback image if icon is null.
+   */
+  const getIcon = (icon) => {
+    return icon
+      ? `data:image/webp;base64,${icon}`
+      : missing_texture;
+  };
+
   return (
     <div className="flex row gap-3 w-full dark:backdrop-blur-3xl bg-base-100/70 border-b-2 h-28 py-2">
       {/* image of items element */}
       <div className="content-center">
-        <img src="" alt="image of item"/>
+        <img className="h-full" src={getIcon(cartItems.icon)} alt="image of item"/>
       </div>
 
       {/* rest of elements */}
