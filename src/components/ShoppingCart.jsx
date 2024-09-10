@@ -7,12 +7,13 @@ import { useShopContext } from '../lib/context';
  *
  * @author Alexander Golüke
  * @author Jonas Schwind
+ * @author Rahaman Walter Dongmepi Wendji
  * @version 0.6.0
  */
 function ShoppingCart() {
 
- /*  const { cartItems, onAdd, onRemove } = useContext(ShopContext) */
-     const {shop:{cartItems}, onAdd, onRemove} = useShopContext()  
+     const {shop:{cartItems}, onAdd, onRemove} = useShopContext() 
+     console.log("from shopping cart: ", cartItems) 
 
 
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
@@ -42,25 +43,21 @@ function ShoppingCart() {
   }
 
   return (
-    <aside className="block col-1">
-      <h1>Warenkorb</h1>
-      <div>{cartItems.length === 0 && <div>Warenkorb ist leer</div>}</div>
+    <div className='w-full mt-28 px-1 h-full'>
+      {cartItems.length === 0 && <div className="text-center text-2xl font-semibold align-middle">Warenkorb ist leer</div>}
       {cartItems.map((item) => (
-        <CartItem key={item.id} cartItem={item} onAdd={onAdd} onRemove={onRemove} />
+        <CartItem key={item.id} cartItems={item} />
       ))}
       <div>
         {cartItems.length !== 0 && (
-          <>
-            <hr />
-            <div>Wasser Insgesamt: {totalWater}L</div>
+          <div>
+            <div>Wasser Insgesamt: {totalWater} L</div>
             <div>Gesamtpreis: {totalPrice} 🪙</div>
-          </>
+            <button onClick={() => submit(cartItems)}>Senden</button>
+          </div>
         )}
       </div>
-      <div>
-        <button onClick={() => submit(cartItems)}>Senden</button>
-      </div>
-    </aside>
+    </div>
   );
 }
 

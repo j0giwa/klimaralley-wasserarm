@@ -1,10 +1,9 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ShopItemList from "../components/ShopItemList";
 import ShopItemListSkeleton from "../components/ShopItemListSkeleton";
-import Cart from "./Cart";
-import { ShopContext, useShopContext } from "../lib/context"
+import { useShopContext } from "../lib/context"
 
 /**
  * Shop page (main part) of the wasserarm-satt game
@@ -19,27 +18,11 @@ function Shop() {
    * @typedef {'FRUIT' | 'VEGETABLE' | 'MEAT' | 'ANINAL_PRODUCT' | 'DRINK'} ItemType
    */
 
-  /**
-   * Represents an array of ShopItems for the shop.
-   *
-   * @typedef {Object} ShopItem
-   * @property {number} id - The ID of the object.
-   * @property {String} name - Name of the product.
-   * @property {ItemType} type - Type (Kategory) of the product.
-   * @property {number} water - waterusage of the product.
-   * @property {number} price - price of the product.
-   */
-
-  /** @type {ShopItem[]} */
-  /* const [shopItems, setShopItems] = useState([]); */
-
-  /** @type {ShopItem[]} */
- /*  const [cartItems, setCartItems] = useState([]); */
 
   /** @type {boolean} */
   const [loading, setLoading] = useState(true);
 
-  const {shop:{shopItems}, onAdd} = useShopContext()
+  const {shop:{shopItems}, setShop, onAdd} = useShopContext()
 
   /**
    * Used for ui programming without backend connection.
@@ -93,19 +76,19 @@ function Shop() {
       .then((jsondata) => {
         setLoading(false);
         console.log(jsondata);
-        setShopItems(jsondata);
+        setShop(state =>({...state, shopItems:jsondata}));
       })
       .catch((err) => {
         console.error(err.message);
 
         // Devtest Fallback
-        //setLoading(false); //TODO: Delete after
-        //setShopItems(fakeShopItems); //TODO: Delete after
+        // setLoading(false); //TODO: Delete after
+        // setShop(state =>({...state, shopItems:fakeShopItems})) //TODO: Delete after
       });
   }, []);
 
   /**
-   * Pares shopitems and returns all unique item-types (categorys)
+   * Parse shopitems and returns all unique item-types (categorys)
    *
    * @param {*} items
    * @returns
@@ -115,42 +98,6 @@ function Shop() {
     return [...new Set(types)];
   };
 
-  /**
-   * Looks if the item is already in the cart and if so will add the quantity.
-   * Else it will add the item
-   *
-   * @param {ShopItem} shopItem
-   */
-  /* const onAdd = (shopItem) => {
-    const exist = cartItems.find((x) => x.id === shopItem.id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === shopItem.id ? { ...exist, qty: exist.qty + 1 } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...shopItem, qty: 1 }]);
-    }
-  }; */
-
-  /**
-   * Looks if the item is only one and if so it will be removed complitly.
-   * Else it will remove one from the quantity.
-   *
-   * @param {ShopItem} shopItem
-   */
-  /* const onRemove = (shopItem) => {
-    const exist = cartItems.find((x) => x.id === shopItem.id);
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== shopItem.id));
-    } else {
-      setCartItems(cartItems.map(x => x.id === shopItem.id ? { ...exist, qty: exist.qty - 1 } : x
-      )
-      );
-    }
-  }; */
-
   return (
     <div className="bg-base-200 dark:bg-map-background dark:bg-no-repeat dark:bg-fixed dark:bg-center dark:bg-cover">
       <header>
@@ -158,7 +105,7 @@ function Shop() {
       </header>
       <main>
         <div className="container container-main mx-auto mt-56 md:px-5">
-          {loading && <ShopItemListSkeleton length={14}/> || <ShopItemList shopItems={shopItems} onAdd={onAdd} />}
+          {loading && <ShopItemListSkeleton length={14}/> || <ShopItemList  />}
         </div>
       </main>
       <Footer />
