@@ -26,8 +26,7 @@ export function ShopContextProvider ({children}) {
     /** @type {{shopItems:ShopItem[], cartItems:ShopItem[]}} */
     const [shop, setShop] = useState({shopItems:[], cartItems:[]});
 
-    /** @type {ShopItem[]} */
-    /* const [cartItems, setCartItems] = useState([]); */
+
 
     /**
      * Looks if the item is already in the cart and if so will add the quantity.
@@ -36,15 +35,17 @@ export function ShopContextProvider ({children}) {
      * @param {ShopItem} shopItem
      */
     const onAdd = (shopItem) => {
-        const exist = shop.cartItems.find((x) => x.id === shopItem.id);
-        if (exist) {
-        setShop(state => ({...state,cartItems:state.cartItems.map((x) =>
-          x.id === shopItem.id ? { ...exist, qty: exist.qty + 1 } : x
-          )})
-        );
-        } else {
-        setShop(state => ({...state,cartItems:[...state.cartItems, { ...shopItem, qty: 1 }]}));
-        }
+        setShop(state => {
+          const exist = state.cartItems.find((x) => x.id === shopItem.id);
+          const cartItems = exist ? [...state.cartItems.map((x) =>
+            x.id === shopItem.id ? { ...exist, qty: exist.qty + 1 } : x
+            )] : [...state.cartItems, { ...shopItem, qty: 1 }]
+            
+            return {
+              ...state, 
+              cartItems
+            }
+        })
     };
 
     /**
@@ -54,14 +55,22 @@ export function ShopContextProvider ({children}) {
    * @param {ShopItem} shopItem
    */
   const onRemove = (shopItem) => {
-    const exist = cartItems.find((x) => x.id === shopItem.id);
-    if (exist.qty === 1) {
-      setShop(state =>({...state, cartItems:state.cartItems.filter((x) => x.id !== shopItem.id)}));
-    } else {
-      setShop(state =>({...state,cartItems:state.cartItems.map(x => x.id === shopItem.id ? { ...exist, qty: exist.qty - 1 } : x
-      )})
-      );
-    }
+    setShop(state => {
+      const exist = state.cartItems.find((x) => x.id === shopItem.id);
+
+      if (!exist) {
+        return state
+      }
+
+      const cartItems = exist.qty > 1 ? state.cartItems.map((x) =>
+        x.id === shopItem.id ? { ...exist, qty: exist.qty - 1 } : x
+        ) : state.cartItems.filter((x) => x.id !== shopItem.id)
+        
+        return {
+          ...state, 
+          cartItems
+        }
+    })
   };
 
   return (

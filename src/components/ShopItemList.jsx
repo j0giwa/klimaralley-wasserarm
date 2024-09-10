@@ -1,5 +1,5 @@
 import ShopItem from './ShopItem';
-
+import { useShopContext } from "../lib/context"
 /**
  * ShopItemList UI component
  *
@@ -9,12 +9,12 @@ import ShopItem from './ShopItem';
  * @author Alexander Golüke
  * @version 0.7.0
  */
-function ShopItemList({ shopItems, onAdd }) {
-
+function ShopItemList() {
+  const {shop:{shopItems}, onAdd} = useShopContext()
   return (
      <ul className="flex flex-wrap justify-around py-4">
-      {shopItems.map((shopItem) => (
-        <ShopItem key={shopItem.id} shopItem={shopItem} onAdd={onAdd} />
+      {shopItems.map((shopItems) => (
+        <ShopItem key={shopItems.id} shopItems={shopItems} onAdd={onAdd} />
       ))}
     </ul>
   );
