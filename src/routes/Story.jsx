@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Speechbubble from "../lib/Speechbubble";
 import map from "/images/map.jpeg";
 import question from "/icons/Question.svg";
@@ -11,6 +11,12 @@ import iconSpeechBubble from "/icons/SpeechBubble.svg";
 import back from "/icons/Back.svg";
 import forward from "/icons/Forward.svg";
 
+
+/**
+ * Index / landing page
+ *
+ * tells the story of the game
+ */
 function Story() {
   const [showGameExplanation, setShowGameExplanation] = useState(true);
 
@@ -30,6 +36,10 @@ function Story() {
   const bubble = Speechbubble.find((content) => content.index === count);
 
   const [gameStart, setGameStart] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Wasserarmsatt';
+  }, [])
 
   return (
     <>
@@ -97,12 +107,12 @@ function Story() {
           </div>
         )}
 
-        {/* Game is explained when player clicked through 
+        {/* Game is explained when player clicked through
       the explaination (count >= 10) => Game starts */}
         {gameStart && (
           <div>
             <div
-              className="absolute top-[10%] left-[35%] right-[40%] 
+              className="absolute top-[10%] left-[35%] right-[40%]
             md:top-[5%] sm:left-[40%] md:right-[46%]"
             >
               <img src={shopIcon} alt="Shop" className="w-full"></img>
