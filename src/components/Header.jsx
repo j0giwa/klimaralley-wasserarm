@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import SearchBar from "./Searchbar";
 import ThemeController from "./ThemeController";
-import coin from "/icons/coin.png";
+import coin from "/icons/Coin.svg";
 import dummyPB from "/icons/dummyPB.webp";
 
 /**

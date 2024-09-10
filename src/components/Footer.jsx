@@ -1,7 +1,8 @@
-import { React } from "react";
-import ingredientscart from "/icons/Ingredients-icon.png";
-import shopIcon from "/icons/Shop-icon.png";
-import storyIcon from "/icons/Storytelling-icon.png";
+import { useState, React } from "react";
+import ShoppingCart from "../components/ShoppingCart";
+import ingredientscart from "/icons/Ingredients.svg";
+import shopIcon from "/icons/Shop.svg";
+import storyIcon from "/icons/Storytelling.svg";
 import { Link } from "react-router-dom";
 
 
