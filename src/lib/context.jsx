@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const ShopContext = createContext()
 
@@ -26,7 +26,24 @@ export function ShopContextProvider ({children}) {
     /** @type {{shopItems:ShopItem[], cartItems:ShopItem[]}} */
     const [shop, setShop] = useState({shopItems:[], cartItems:[]});
 
-
+    // make shure to fetch data from the local storage of the browser after the reload of the webpage
+    useEffect(()=>{
+      const cartItems = JSON.parse(localStorage.getItem('cartItems'))
+      
+        setShop(state =>{
+          if (!cartItems) {
+          return state
+          }
+          return {
+            ...state,
+            cartItems
+          }
+        })
+    }, [])
+  	
+    useEffect (() => {
+      localStorage.setItem('cartItems', JSON.stringify(shop.cartItems))
+    }, [shop.cartItems])
 
     /**
      * Looks if the item is already in the cart and if so will add the quantity.
