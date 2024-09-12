@@ -1,4 +1,5 @@
 import coin from "/icons/Coin.svg";
+import missing_texture from "/missing_textures.webp";
 
 /**
  * Shopitem UI component
@@ -20,7 +21,7 @@ function ShopItem({ shopItems, onAdd }) {
   const getIcon = (icon) => {
     return icon
       ? `data:image/webp;base64,${icon}`
-      : `missing_textures.webp`;
+      : missing_texture;
   };
 
   return (
@@ -55,9 +56,9 @@ function ShopItem({ shopItems, onAdd }) {
                 </div>
             </div>
              <div className="flex justify-between">
-              Preis : 
+              Preis :
               <div className="flex ">
-                <span>{shopItems.price}</span> 
+                <span>{shopItems.price}</span>
                 <img className="h-[23px]" src={coin} alt="Coins"></img>
               </div>
              </div>
