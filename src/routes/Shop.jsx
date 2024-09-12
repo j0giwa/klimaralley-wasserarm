@@ -101,7 +101,7 @@ function Shop() {
   return (
     <div className="bg-base-200 dark:bg-map-background dark:bg-no-repeat dark:bg-fixed dark:bg-center dark:bg-cover">
       <header>
-        <Header searchBar={true} categorys={getUniqueTypes(shopItems)}/>
+        <Header searchBar={true} categorys={getUniqueTypes(shopItems)} total={false}/>
       </header>
       <main>
         <div className="container container-main mx-auto mt-56 md:px-5">

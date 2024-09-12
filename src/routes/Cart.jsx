@@ -12,9 +12,11 @@ import Footer from "../components/Footer";
  */
 function Cart() {
   return (
-    <div >
-      <Header />
-      <main className="bg-base-200 dark:bg-map-background dark:bg-no-repeat dark:bg-fixed dark:bg-center dark:bg-cover h-screen">
+    <div>
+      <header>
+        <Header searchBar={false} total={true}/>
+      </header>
+      <main className="bg-base-200  dark:bg-map-background dark:bg-no-repeat dark:bg-fixed dark:bg-center dark:bg-cover h-screen">
         <ShoppingCart />
       </main>
       <Footer />

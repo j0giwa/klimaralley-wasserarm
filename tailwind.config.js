@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       backgroundImage:{
-        'map-background':"url(./public/images/mapNone.jpg)",
+        'map-background':"url(./public/images/mapback.png)",
       }
     },
   },

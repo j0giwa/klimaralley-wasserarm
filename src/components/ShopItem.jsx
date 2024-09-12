@@ -1,4 +1,4 @@
-import coin from "/icons/coin.png";
+import coin from "/icons/Coin.svg";
 
 /**
  * Shopitem UI component
