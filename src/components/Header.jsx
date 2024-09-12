@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import SearchBar from "./Searchbar";
+import Total from "./Total";
 import ThemeController from "./ThemeController";
 import coin from "/icons/Coin.svg";
 import dummyPB from "/icons/dummyPB.webp";
@@ -17,7 +18,7 @@ import dummyPB from "/icons/dummyPB.webp";
  * @author R. Walter Dongmepi W.
  * @author Jonas Schwind
  */
-function Header({ searchBar, categorys }) {
+function Header({ searchBar, categorys, total }) {
   // Language icon
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
@@ -71,7 +72,7 @@ function Header({ searchBar, categorys }) {
   });
 
   return (
-    <div className="z-20 fixed top-0 left-0 right-0 px-3 w-full py-[24px] bg-base-100 dark:bg-base-100/60 dark:backdrop-blur-3xl shadow-xl flex flex-col gap-4">
+    <div className="z-20 fixed top-0 left-0 right-0 px-3 w-full py-[24px] bg-base-100 dark:backdrop-blur-3xl shadow-xl flex flex-col gap-4">
       <div className="flex items-center justify-between">
         {/* More Menu */}
         <div>
@@ -192,6 +193,12 @@ function Header({ searchBar, categorys }) {
       {searchBar && (
         <div className="flex-col">
           <SearchBar categories={categorys} />
+        </div>
+      )}
+      {/* Total water and coin */}
+      {total && (
+        <div>
+          <Total />
         </div>
       )}
     </div>

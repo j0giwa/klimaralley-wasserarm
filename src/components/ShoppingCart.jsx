@@ -13,10 +13,12 @@ import { useShopContext } from '../lib/context';
  */
 function ShoppingCart() {
 
-  const {shop:{cartItems}, onAdd, onRemove} = useShopContext()
+  const {shop:{cartItems}} = useShopContext() 
 
+  /*
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const totalWater = cartItems.reduce((a, c) => a + c.water * c.qty, 0);
+  */
 
    /** @type {String} */
   const [alertMessage, setAlertMessage] = useState('');
@@ -31,7 +33,7 @@ function ShoppingCart() {
    * @param {ShopItem[]} wasserarmShopItems
    * @returns Score
    */
-  const submit = async (wasserarmShopItems) => {
+/*   const submit = async (wasserarmShopItems) => {
     await fetch('http://localhost:8080/water/score', {
       method: 'POST',
       headers: {
@@ -55,6 +57,7 @@ function ShoppingCart() {
       setShowAlert(true);
     });
   }
+*/
 
   const handleCloseAlert = () => {
     setAlertMessage('');
@@ -63,21 +66,26 @@ function ShoppingCart() {
   };
 
   return (
-    <div className='w-full mt-28 px-1 h-full'>
+    <div className="w-full mt-[108px] px-1 h-full ">
       {showAlert && <Alert className="z-50" message={alertMessage} type={alertType} onClose={handleCloseAlert} />}
-      {cartItems.length === 0 && <div className="text-center text-2xl font-semibold align-middle">Warenkorb ist leer</div>}
-      {cartItems.map((item) => (
-        <CartItem key={item.id} cartItems={item} />
-      ))}
-      <div>
-        {cartItems.length !== 0 && (
-          <div>
-            <div>Wasser Insgesamt: {totalWater} L</div>
-            <div>Gesamtpreis: {totalPrice} 🪙</div>
-            <button onClick={() => submit(cartItems)}>Senden</button>
-          </div>
-        )}
+      {cartItems.length === 0 && <div className="text-2xl font-semibold py-48 px-0 top-1/2 left-1/2 text-center"><p>Warenkorb ist leer</p></div>}
+      <div className="mt-48">
+        {cartItems.map((item) => (
+          <CartItem key={item.id} cartItems={item} />
+        ))}
       </div>
+      {
+        /*<div>
+          {
+            cartItems.length !== 0 && (
+              <div>
+                <div>Wasser Insgesamt: {totalWater} L</div>
+                <div>Gesamtpreis: {totalPrice} 🪙</div>
+                <button onClick={() => submit(cartItems)}>Senden</button>
+              </div>
+          )}
+        </div>*/
+      }
     </div>
   );
 }

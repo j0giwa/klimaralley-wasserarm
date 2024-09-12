@@ -1,5 +1,4 @@
-import { useState, React } from "react";
-import ShoppingCart from "../components/ShoppingCart";
+import { React } from "react";
 import ingredientscart from "/icons/Ingredients.svg";
 import shopIcon from "/icons/Shop.svg";
 import storyIcon from "/icons/Storytelling.svg";
@@ -18,7 +17,7 @@ function Footer() {
 
   return (
     <>
-      <div className="flex justify-between items-center px-7 shadow-xl fixed bottom-0 left-1/2 -translate-x-1/2 z-10 w-[374px] h-[60px] mx-auto my-[4px] bg-base-200 backdrop-blur-sm rounded-full border-base-300 border-2">
+      <div className="flex justify-between items-center px-7 shadow-xl fixed bottom-0 left-1/2 -translate-x-1/2 z-10 w-[374px] h-[60px] mx-auto my-[4px] bg-base-100 backdrop-blur-3xl rounded-full border-base-300 border-2">
         <Link
           className="btn bg-transparent border-none px-1 btn-ghost rounded-xl"
           to="/play/wasserarm/shop"
