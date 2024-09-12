@@ -26,7 +26,7 @@ function Footer() {
         </Link>
         <Link
           className="btn btn-ghost bg-transparent border-none px-1 rounded-xl"
-          to="/play/wasserarm/story"
+          to="/play/wasserarm/"
         >
           <img src={storyIcon} alt="image of story icon" />
         </Link>

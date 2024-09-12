@@ -4,7 +4,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import App from './routes/App.jsx'
 import Shop from './routes/Shop.jsx'
 import Cart from './routes/Cart.jsx';
 import './index.css'
@@ -15,7 +14,7 @@ import { ShopContextProvider } from './lib/context.jsx';
 const router = createBrowserRouter([
   {
     path: "/play/wasserarm",
-    element: <App />,
+    element: <Story />,
   },
   {
     path: "/play/wasserarm/shop",
@@ -24,10 +23,6 @@ const router = createBrowserRouter([
   {
     path:"/play/wasserarm/Cart",
     element: <Cart />,
-  },
-  {
-    path:"/play/wasserarm/story",
-    element: <Story />,
   },
 ]);
 
