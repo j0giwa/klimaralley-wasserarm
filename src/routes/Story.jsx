@@ -1,7 +1,9 @@
 import React from "react";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
+import QuizCard from "../components/QuizCard";
 import Speechbubble from "../lib/Speechbubble";
 import map from "/images/map.jpeg";
+import mapNone from "/images/mapNone.jpg";
 import question from "/icons/Question.svg";
 import shopIcon from "/icons/Shop.svg";
 import help from "/icons/Inquiry.svg";
@@ -11,13 +13,16 @@ import iconSpeechBubble from "/icons/SpeechBubble.svg";
 import back from "/icons/Back.svg";
 import forward from "/icons/Forward.svg";
 
-
 /**
  * Index / landing page
  *
  * tells the story of the game
  */
 function Story() {
+  useEffect(() => {
+    document.title = "Wasserarmsatt";
+  }, []);
+
   const [showGameExplanation, setShowGameExplanation] = useState(true);
 
   const [count, setCount] = useState(0);
@@ -37,9 +42,13 @@ function Story() {
 
   const [gameStart, setGameStart] = useState(false);
 
-  useEffect(() => {
-    document.title = 'Wasserarmsatt';
-  }, [])
+  const [showQuiz, setShowQuiz] = useState(false);
+
+  function toggleSetShowQuiz() {
+    setShowQuiz(true);
+  }
+
+  let number;
 
   return (
     <>
@@ -110,31 +119,53 @@ function Story() {
         {/* Game is explained when player clicked through
       the explaination (count >= 10) => Game starts */}
         {gameStart && (
+          // pictures with 10% of full width in display >= md
           <div>
-            <div
-              className="absolute top-[10%] left-[35%] right-[40%]
+            <button
+              className="shop-icon absolute top-[10%] left-[35%] right-[40%] 
             md:top-[5%] sm:left-[40%] md:right-[46%]"
             >
               <img src={shopIcon} alt="Shop" className="w-full"></img>
-            </div>
-            <div
-              className="absolute top-[0%]  left-0 right-0
-          "
-            >
-              <img src={help} alt="Frage"></img>
-            </div>
-            <div className="absolute top-[90%]  left-0 right-0">
-              <img src={question} alt="Frage"></img>
-            </div>
-            <div className="absolute top-[90%]  left-0 right-0">
-              <img src={question} alt="Frage"></img>
-            </div>
-            <div className="absolute top-[90%]  left-0 right-0">
-              <img src={question} alt="Frage"></img>
-            </div>
-            <div className="absolute top-[90%]  left-0 right-0">
-              <img src={go} alt="Frage"></img>
-            </div>
+            </button>
+            <button className="help-icon absolute top-[20%]  left-[2%] md:right-[90%]">
+              <img src={help} alt="Frage" className="w-full"></img>
+            </button>
+            {/* question 3 */}
+            <button className="question-3 absolute top-[25%] right-[28%] md:top-[22%] md:left-[60%] md:right-[30%]">
+              <img
+                src={question}
+                alt="Frage"
+                className="w-full"
+                onClick={toggleSetShowQuiz}
+                number={3}
+              ></img>
+            </button>
+            {/* question 2 */}
+            <button className="question-2 absolute top-[45%] left-[23%] md:top-[43%] md:left-[25%] md:right-[65%]">
+              <img
+                src={question}
+                alt="Frage"
+                className="w-full"
+                onClick={toggleSetShowQuiz}
+                number={2}
+              ></img>
+            </button>
+            {/* question 1 */}
+            <button className="question-1 absolute top-[55%] right-[28%] md:top-[52%] md:left-[60%] md:right-[30%]">
+              <img
+                src={question}
+                alt="Frage"
+                className="w-full"
+                onClick={toggleSetShowQuiz}
+                number={1}
+              ></img>
+            </button>
+
+            <button className="go-icon absolute top-[83%] right-[34%] md:left-[55%] md:right-[35%]">
+              <img src={go} alt="Frage" className="w-full"></img>
+            </button>
+
+            {showQuiz && <QuizCard questionNumber={1} />}
           </div>
         )}
       </div>
