@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <Story />,
   },
   {
-    path: "/play/wasserarm/shop",
+    path: "/play/wasserarm/shop/:category?",
     element: <Shop />,
   },
   {
