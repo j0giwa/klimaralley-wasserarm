@@ -20,7 +20,7 @@ function Footer() {
       <div className="flex justify-between items-center px-7 shadow-xl fixed bottom-0 left-1/2 -translate-x-1/2 z-10 w-[374px] h-[60px] mx-auto my-[4px] bg-base-100 backdrop-blur-3xl rounded-full border-base-300 border-2">
         <Link
           className="btn bg-transparent border-none px-1 btn-ghost rounded-xl"
-          to="/play/wasserarm/shop"
+          to="/play/wasserarm/shop/:category?"
         >
           <img src={shopIcon} alt="image of shop icon" />
         </Link>
