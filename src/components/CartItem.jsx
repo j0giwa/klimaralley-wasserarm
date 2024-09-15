@@ -10,7 +10,7 @@ import missing_texture from "/missing_textures.webp";
  */
 function CartItem({ cartItems }){
 
-  const { onAdd, onRemove } = useShopContext();
+  const { onAdd, onRemove, onRemoveItem } = useShopContext();
 
   /**
    * Returns either a base64 encoded webp from the api,
@@ -41,7 +41,7 @@ function CartItem({ cartItems }){
             <p className="text-xs h-fit">{cartItems.qty*cartItems.water} L</p>
           </div>
           {/* remove icon for element */}
-          <button className='mb-6'>
+          <button onClick={() => onRemoveItem(cartItems)} className='mb-6'>
             <svg width="24" height="24" viewBox="0 0 24 24" className='stroke-base-content' xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_1203_4078)">
                 <path d="M16.9999 7L7 16.9999"  stroke-width="3" stroke-linecap="round"/>

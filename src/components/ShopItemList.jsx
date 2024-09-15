@@ -19,7 +19,8 @@ function ShopItemList() {
   console.log(params)
 
   //Filter shopItems based on the selected category
-  const filteredItems = shopItems.filter(item => item.type === params.category)
+  const filteredItems = !params.category || params.category === "all" ?
+  shopItems : shopItems.filter(item => item.type === params.category);
 
   return (
      <ul className="flex flex-wrap justify-around py-4">
