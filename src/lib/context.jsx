@@ -90,8 +90,19 @@ export function ShopContextProvider ({children}) {
     })
   };
 
+  //Remove the item from the shopping cart, no matter how much the quantity is.
+  const onRemoveItem = (shopItem) => {
+    setShop(state => {
+      const cartItems = state.cartItems.filter((x) => x.id !== shopItem.id);
+      return {
+        ...state,
+        cartItems
+      };
+    });
+  };
+
   return (
-        <ShopContext.Provider value={{shop, setShop, onAdd, onRemove}}>
+        <ShopContext.Provider value={{shop, setShop, onAdd, onRemove, onRemoveItem}}>
           {children}
         </ShopContext.Provider>
   )
