@@ -20,6 +20,8 @@ function Searchbar ({ categories }) {
     setSelectedCatogory(selectedType)
     if (selectedType) {
       navigate(`/play/wasserarm/shop/${selectedType}`)
+    } else {
+      navigate(`/play/wasserarm/shop/`)
     }
   };
 
@@ -30,7 +32,8 @@ function Searchbar ({ categories }) {
         value={selectedCategory}
         onChange={handleChange}
         >
-        <option disabled selected>Kategorien</option>
+        <option disabled>Kategorien</option>
+        <option value="all">All</option>
         {categories.map((type, index) => (
           <option key={index} value={type}>{type}</option>
         ))}

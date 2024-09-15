@@ -33,7 +33,7 @@ function ShopItem({ shopItems, onAdd }) {
         <div className="card-body items-center text-center">
           <h2 className="card-title">{shopItems.name}</h2>
           <p>
-            Wasser: <span className="text-info">{shopItems.water}</span>
+            Wasser: <span className="text-info">{shopItems.water} L</span>
           </p>
         </div>
         <div className="card-actions justify-end p-0">
