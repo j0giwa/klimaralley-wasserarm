@@ -29,11 +29,11 @@ function Alert({ message, type = 'info', onClose }) {
   }
 
   return (
-    <div className={alertClass}>
+    <div className={`${alertClass} absolute flex justify-between w-80 mx-auto`}>
       <div>
         <span>{message}</span>
       </div>
-      <button className="btn btn-sm btn-circle btn-ghost" onClick={onClose}>
+      <button className="btn btn-lg btn-circle btn-ghost" onClick={onClose}>
         &times;
       </button>
     </div>
