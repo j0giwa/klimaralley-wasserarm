@@ -1,44 +1,62 @@
-import React, { useState } from "react";
-import Alert from './Alert';
 import { useShopContext } from '../lib/context';
-
-
+import {getCookie} from "../lib/cookieUtils";
+import Alert from './Alert';
 
 /**
  * render the total water and price of all
  * the elements added in the Cart
  * 
+ *  @author R. Walter Dongmepi W.
  */
 function Total() {
-    const {shop:{cartItems}} = useShopContext()
 
-    const totalPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-    const totalWater = cartItems.reduce((a, c) => a + c.water * c.qty, 0);
+  const {shop:{cartItems}} = useShopContext()
 
+  const totalPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
+  const totalWater = cartItems.reduce((a, c) => a + c.water * c.qty, 0);
 
-      /** @type {String} */
-      const [alertMessage, setAlertMessage] = useState('');
-      /** @type {String} */
-      const [alertType, setAlertType] = useState('');
-      /** @type {boolean} */
-      const [showAlert, setShowAlert] = useState(false);
+  const [authToken, setAuthToken] = useState("");
+
+  useEffect(() => {
+    const jwtToken = getCookie("jwt");
+    if (jwtToken) {
+      console.log(jwtToken);
+      setAuthToken(jwtToken);
+    }
+  }, []);
+
+  /** @type {String} */
+  const [alertMessage, setAlertMessage] = useState('');
+  /** @type {String} */
+  const [alertType, setAlertType] = useState('');
+  /** @type {boolean} */
+  const [showAlert, setShowAlert] = useState(false);
   
-      const handleCloseAlert = () => {
-        setAlertMessage('');
-        setAlertType('');
-        setShowAlert(false);
-      };
+  const handleCloseAlert = () => {
+    setAlertMessage('');
+    setAlertType('');
+    setShowAlert(false);
+  };
 
 
-
-    /**
+  /**
    * Send the game state to backend for evaluation.
    *
    * @param {ShopItem[]} wasserarmShopItems
    * @returns Score
    */
   const submit = async (wasserarmShopItems) => {
-        await fetch('http://localhost:8080/water/score', {
+   
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    await fetch('http://localhost:8080/water/score', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -60,25 +78,26 @@ function Total() {
           .finally(() => {
             setShowAlert(true);
           });
-        }
+    }
 
-    return (
-        <div>
-        {cartItems.length !== 0 && (
-            <div className="text-center h-20 flex flex-col gap-5">
-                {showAlert && <Alert className="z-50" message={alertMessage} type={alertType} onClose={handleCloseAlert} />}
-                <div className="flex justify-between">
-                    <p className="">Wasser Insgesamt: <span className="text-info font-semibold">{totalWater} L</span> </p>
-                    <p>Gesamtpreis: <span className="text-info font-semibold">{totalPrice} 🪙</span> </p>
-                </div>
-                <div>
-                    <button className="btn btn-secondary font-semibold px-2 rounded-xl w-20" onClick={() => submit(cartItems)}>Bereiten</button>
-                </div>
+  return (
+    <>
+      {
+        cartItems.length !== 0 && (
+          <div className="text-center h-20 flex flex-col gap-5">
+            {showAlert && <Alert className="z-50" message={alertMessage} type={alertType} onClose={handleCloseAlert} />}
+            <div className="flex justify-between">
+              <p className="">Wasser Insgesamt: <span className="text-info font-semibold">{totalWater} L</span> </p>
+                <p>Gesamtpreis: <span className="text-info font-semibold">{totalPrice} 🪙</span> </p>
             </div>
-          
-        )}
-      </div>
-    )
+            <div>
+              <button className="btn btn-secondary font-semibold px-2 rounded-xl w-20" onClick={() => submit(cartItems)}>Bereiten</button>
+            </div>
+          </div>
+        )
+      }
+    </>
+  )
 }
 
 export default Total;
