@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import { useShopContext } from '../lib/context';
-import {getCookie} from "../lib/cookieUtils"
+import {getCookie} from "../lib/cookieUtils";
+import Alert from './Alert';
 
 /**
  * render the total water and price of all
@@ -25,6 +25,20 @@ function Total() {
     }
   }, []);
 
+  /** @type {String} */
+  const [alertMessage, setAlertMessage] = useState('');
+  /** @type {String} */
+  const [alertType, setAlertType] = useState('');
+  /** @type {boolean} */
+  const [showAlert, setShowAlert] = useState(false);
+  
+  const handleCloseAlert = () => {
+    setAlertMessage('');
+    setAlertType('');
+    setShowAlert(false);
+  };
+
+
   /**
    * Send the game state to backend for evaluation.
    *
@@ -32,7 +46,7 @@ function Total() {
    * @returns Score
    */
   const submit = async (wasserarmShopItems) => {
-    
+   
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -43,23 +57,35 @@ function Total() {
     }
 
     await fetch('http://localhost:8080/water/score', {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({
-        eaterid: 0, // TODO: Add eater id of actual eater.
-        items: wasserarmShopItems
-      }),
-    })
-    .then((response) => response.json())
-    .then((data) => { console.log(data); })
-    .catch((err) => { console.error(err.message); });
-  }
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            // TODO: Add authorisation bearer token
+        },
+        body: JSON.stringify({
+            eaterid: 0, // TODO: Change to actual eaterid
+            items: wasserarmShopItems
+        }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            setAlertMessage('Ihre Punktzahl ist ' + data.score );
+            setAlertType('success');
+            console.log(data);
+          })
+          .catch((err) => { console.error(err.message); })
+          .finally(() => {
+            setShowAlert(true);
+          });
+    }
 
   return (
     <>
       {
         cartItems.length !== 0 && (
           <div className="text-center h-20 flex flex-col gap-5">
+            {showAlert && <Alert className="z-50" message={alertMessage} type={alertType} onClose={handleCloseAlert} />}
             <div className="flex justify-between">
               <p className="">Wasser Insgesamt: <span className="text-info font-semibold">{totalWater} L</span> </p>
                 <p>Gesamtpreis: <span className="text-info font-semibold">{totalPrice} 🪙</span> </p>
