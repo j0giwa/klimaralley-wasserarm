@@ -12,6 +12,7 @@ import person from "/icons/Person.svg";
 import iconSpeechBubble from "/icons/SpeechBubble.svg";
 import back from "/icons/Back.svg";
 import forward from "/icons/Forward.svg";
+import coin from "/icons/Coin.svg";
 
 /**
  * Index / landing page
@@ -25,30 +26,40 @@ function Story() {
 
   const [showGameExplanation, setShowGameExplanation] = useState(true);
 
-  const [count, setCount] = useState(0);
+  const [bubbleCount, setBubbleCount] = useState(0);
 
   const minusCount = () => {
-    if (count < 1) {
+    if (bubbleCount < 1) {
     } else {
-      setCount(count - 1);
+      setBubbleCount(bubbleCount - 1);
     }
   };
 
   const plusCount = () => {
-    setCount(count + 1);
+    setBubbleCount(bubbleCount + 1);
   };
 
-  const bubble = Speechbubble.find((content) => content.index === count);
+  const bubble = Speechbubble.find((content) => content.index === bubbleCount);
 
   const [gameStart, setGameStart] = useState(false);
 
   const [showQuiz, setShowQuiz] = useState(false);
+  const [number, setNumber] = useState(0);
 
-  function toggleSetShowQuiz() {
-    setShowQuiz(true);
+  function toggleQuestion(num) {
+    if (num <= 3) {
+      setNumber(num);
+      setShowQuiz(true);
+    } else if (num === 100) {
+      // 100 closes the window
+      setNumber(100);
+      setShowQuiz(false);
+    }
   }
 
-  let number;
+  const [question2, setQuestion2] = useState(true);
+  const [question1, setQuestion1] = useState(false);
+  const [question0, setQuestion0] = useState(null);
 
   return (
     <>
@@ -97,7 +108,7 @@ function Story() {
               <button className="p-3" onClick={minusCount}>
                 <img src={back} alt="icon zurück" />
               </button>
-              {count === 10 ? (
+              {bubbleCount === 10 ? (
                 <button
                   onClick={() => {
                     setShowGameExplanation(false);
@@ -121,6 +132,13 @@ function Story() {
         {gameStart && (
           // pictures with 10% of full width in display >= md
           <div>
+            {/* Money */}
+            <div className="absolute flex justify-center top-[2%] inset-x-[40%] p-1 bg-base-200 border-2 border-base-300 rounded-full">
+              {/*make dynamic coin counter*/}
+              <p>0000</p>
+              <img className="h-[23px]" src={coin} alt="Coins"></img>
+            </div>
+
             <button
               className="shop-icon absolute top-[10%] left-[35%] right-[40%] 
             md:top-[5%] sm:left-[40%] md:right-[46%]"
@@ -131,33 +149,54 @@ function Story() {
               <img src={help} alt="Frage" className="w-full"></img>
             </button>
             {/* question 3 */}
-            <button className="question-3 absolute top-[25%] right-[28%] md:top-[22%] md:left-[60%] md:right-[30%]">
+            <button
+              className={`question-3 absolute top-[25%] right-[28%] md:top-[22%] md:left-[60%] md:right-[30%] ${
+                question2 === true
+                  ? "bg-green-500"
+                  : question2 === false
+                  ? "bg-red-500"
+                  : ""
+              }`}
+            >
               <img
                 src={question}
                 alt="Frage"
                 className="w-full"
-                onClick={toggleSetShowQuiz}
-                number={3}
+                onClick={() => toggleQuestion(2)}
               ></img>
             </button>
             {/* question 2 */}
-            <button className="question-2 absolute top-[45%] left-[23%] md:top-[43%] md:left-[25%] md:right-[65%]">
+            <button
+              className={`question-2 absolute top-[45%] left-[23%] md:top-[43%] md:left-[25%] md:right-[65%] ${
+                question1 === true
+                  ? "bg-green-500"
+                  : question1 === false
+                  ? "bg-red-500"
+                  : ""
+              }`}
+            >
               <img
                 src={question}
                 alt="Frage"
                 className="w-full"
-                onClick={toggleSetShowQuiz}
-                number={2}
+                onClick={() => toggleQuestion(1)}
               ></img>
             </button>
             {/* question 1 */}
-            <button className="question-1 absolute top-[55%] right-[28%] md:top-[52%] md:left-[60%] md:right-[30%]">
+            <button
+              className={`question-1 absolute top-[55%] right-[28%] md:top-[52%] md:left-[60%] md:right-[30%] ${
+                question0 === true
+                  ? "bg-green-500"
+                  : question0 === false
+                  ? "bg-red-500"
+                  : ""
+              }`}
+            >
               <img
                 src={question}
                 alt="Frage"
                 className="w-full"
-                onClick={toggleSetShowQuiz}
-                number={1}
+                onClick={() => toggleQuestion(0)}
               ></img>
             </button>
 
@@ -165,7 +204,13 @@ function Story() {
               <img src={go} alt="Frage" className="w-full"></img>
             </button>
 
-            {showQuiz && <QuizCard questionNumber={1} />}
+            {showQuiz && (
+              <QuizCard
+                questionNumber={number}
+                // isAnsweredRight={() => }
+                onClose={() => toggleQuestion(100)}
+              />
+            )}
           </div>
         )}
       </div>
