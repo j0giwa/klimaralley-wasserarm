@@ -9,19 +9,19 @@ const Speechbubble = [
 
   {
     index: 4,
-    text: "Das virtuelle Wasser erhälst du durch das Lösen eines Quiz",
+    text: "Für Nahrungsmittel wird viel Wasser verbraucht, eshalb sollst du ein Wassereffizientes Gericht zubereiten.",
   },
   {
     index: 5,
-    text: "Die Fragen beziehen sich auf echte Trinkwasserstellen in der Stadt Lemgo",
+    text: "Vorher musst dur dir aber erst Coins erspielen durch das beantworten einiger Fragen!",
   },
   {
     index: 6,
-    text: "Für jede richtig beantwortete Frage erhälst du 500 Liter Wasser",
+    text: "Für jede richtig beantwortete Frage erhälst du 500 Coins. Durch sie kannst du danach das Essen bezahlen.",
   },
   {
     index: 7,
-    text: "Klicke die Checkpoints auf der Karte an um sie zu beantworten",
+    text: "Klicke die Fragezeichen auf der Karte an um sie zu beantworten",
   },
   {
     index: 8,
@@ -29,11 +29,11 @@ const Speechbubble = [
   },
   {
     index: 9,
-    text: "Hast du mindestens 2 Fragen richtig beantwortet kannst du das Wasser benutzten",
+    text: "Die Stadt Lemgo wünscht dir ",
   },
   {
     index: 10,
-    text: "Viel Spaß",
+    text: "viel Spaß",
   },
 ];
 
