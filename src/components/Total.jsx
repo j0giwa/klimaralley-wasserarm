@@ -46,7 +46,10 @@ function Total() {
    * @returns Score
    */
   const submit = async (wasserarmShopItems) => {
-   
+    
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/score';
+
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -56,7 +59,7 @@ function Total() {
       headers['Authorization'] = `Bearer ${authToken}`;
     }
 
-    await fetch('http://localhost:8080/water/score', {
+    await fetch(`${api}${method}`, {
       method: 'POST',
       headers: {
           'Accept': 'application/json',

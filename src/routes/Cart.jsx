@@ -11,6 +11,11 @@ import Footer from "../components/Footer";
  * @version 0.5.0
  */
 function Cart() {
+
+  useEffect(() => {
+    document.title = "Cart | Wasserarmsatt";
+  }, []);
+  
   return (
     <div>
       <header>

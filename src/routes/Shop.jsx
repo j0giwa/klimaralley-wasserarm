@@ -18,7 +18,6 @@ function Shop() {
    * @typedef {'FRUIT' | 'VEGETABLE' | 'MEAT' | 'ANINAL_PRODUCT' | 'DRINK'} ItemType
    */
 
-
   /** @type {boolean} */
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +30,6 @@ function Shop() {
    *
    * @type {ShopItem[]}
    */
-
   /*
   const fakeShopItems = [
     { id: 0, name: "Fake", type: "DRINK", water: 0, price: 0 },
@@ -70,8 +68,13 @@ function Shop() {
   */
 
   useEffect(() => {
+
     document.title = "Shop | Wasserarmsatt";
-    fetch("http://localhost:8080/water/items")
+
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/items';
+
+    fetch(`${api}${method}`)
       .then((response) => response.json())
       .then((jsondata) => {
         setLoading(false);
