@@ -35,7 +35,7 @@ const quiz = [
   },
 ];
 
-function QuizCard({ questionNumber, handleAnswere, onClose }) {
+function QuizCard({ questionNumber, handleAnswer, onClose }) {
   const currentQuestion = quiz[questionNumber];
 
   const [selectedOption, setSelectedOption] = useState(null);
@@ -51,12 +51,12 @@ function QuizCard({ questionNumber, handleAnswere, onClose }) {
   useEffect(() => {
     if (feedback) {
       if (selectedOption === currentQuestion.correctAnswer) {
-        handleAnswere(questionNumber, true); // Call ifCorrect if the answer is correct
+        handleAnswer(questionNumber, true); // Call ifCorrect if the answer is correct
       } else {
-        handleAnswere(questionNumber, false); // Call ifWrong if the answer is incorrect
+        handleAnswer(questionNumber, false); // Call ifWrong if the answer is incorrect
       }
     }
-  }, [feedback, selectedOption, currentQuestion, handleAnswere]);
+  }, [feedback, selectedOption, currentQuestion, handleAnswer]);
 
   return (
     <div className="quiz-card flex flex-col absolute inset-[5%] bg-white p-3 rounded-lg shadow-lg max-w-md mx-auto">

@@ -12,8 +12,9 @@ import person from "/icons/Person.svg";
 import iconSpeechBubble from "/icons/SpeechBubble.svg";
 import back from "/icons/Back.svg";
 import forward from "/icons/Forward.svg";
-import coin from "/icons/Coin.svg";
+import coinIcon from "/icons/Coin.svg";
 import { Link } from "react-router-dom";
+import { useShopContext } from "../lib/context";
 
 /**
  * Index / landing page
@@ -25,22 +26,14 @@ function Story() {
     document.title = "Wasserarmsatt";
   }, []);
 
+  const { coins, setCoins } = useShopContext();
+
+  // everything for game explaination
   const [showGameExplanation, setShowGameExplanation] = useState(true);
-
   const [bubbleCount, setBubbleCount] = useState(0);
-
-  const minusCount = () => {
-    if (bubbleCount < 1) {
-    } else {
-      setBubbleCount(bubbleCount - 1);
-    }
-  };
-
-  const plusCount = () => {
-    setBubbleCount(bubbleCount + 1);
-  };
-
-  const bubble = Speechbubble.find((content) => content.index === bubbleCount);
+  const bubbleContent = Speechbubble.find(
+    (content) => content.index === bubbleCount
+  );
 
   const [gameStart, setGameStart] = useState(false);
 
@@ -48,42 +41,49 @@ function Story() {
 
   const [showQuiz, setShowQuiz] = useState(false);
 
-  const [number, setNumber] = useState(0);
+  const [showShop, setShowShop] = useState(false);
+
+  const [questionNumber, setQuestionNumber] = useState(0);
 
   function toggleQuestion(num) {
     if (num <= 3) {
-      setNumber(num);
+      setQuestionNumber(num);
       setShowQuiz(true);
-    } else if (num === 100) {
-      // 100 closes the window
-      setNumber(100);
-      setShowQuiz(false);
-    }
-  }
-
-  function handleAnswere(number, bool) {
-    if (number === 2) setQuestion2(bool);
-    else if (number === 1) setQuestion1(bool);
-    else if (number === 0) setQuestion0(bool);
+    } else setShowQuiz(false);
   }
 
   const [question2, setQuestion2] = useState(null);
   const [question1, setQuestion1] = useState(null);
   const [question0, setQuestion0] = useState(null);
 
+  function handleAnswer(number, isCorrect) {
+    const questionStates = [question0, question1, question2];
+    const setQuestionFunctions = [setQuestion0, setQuestion1, setQuestion2];
+
+    if (isCorrect) {
+      if (!questionStates[number]) {
+        setQuestionFunctions[number](true);
+        setCoins(coins + 500);
+      }
+    } else {
+      setQuestionFunctions[number](false);
+    }
+    // all questions finished
+    if (question2 != null && question1 != null && question0 != null) {
+      setShowShop(true);
+    }
+  }
+
   return (
     <>
       {/*background map*/}
       <div className="relative bg-base-200 dark:bg-map-background dark:bg-no-repeat dark:bg-fixed dark:bg-center dark:bg-cover dark:h-screen">
-        {!gameStart ? (
-          <img
-            src={map}
-            alt="Karte"
-            className="h-[calc(100dvh)] w-full opacity-50"
-          ></img>
-        ) : (
-          <img src={map} alt="Karte" className="h-[calc(100dvh)] w-full"></img>
-        )}
+        <img
+          src={map}
+          alt="Karte"
+          className={`h-[calc(100dvh)] w-full "
+          ${gameStart === false ? "opacity-50" : ""}`}
+        ></img>
 
         {/* Game explaination starts*/}
         {showGameExplanation && (
@@ -101,7 +101,7 @@ function Story() {
                   className="w-full"
                 ></img>
                 <div className="absolute inset-0 pl-12 px-10 flex items-center justify-center text-lg text-black">
-                  {bubble.text}
+                  {bubbleContent.text}
                 </div>
               </div>
             </div>
@@ -115,7 +115,12 @@ function Story() {
             </div>
             {/* Counter for speechbubble*/}
             <div className="absolute  bottom-[40px] left-1/3 right-1/3 flex justify-center items-contend ">
-              <button className="p-3" onClick={minusCount}>
+              <button
+                className="p-3"
+                onClick={() =>
+                  setBubbleCount((count) => (count > 0 ? count - 1 : count))
+                }
+              >
                 <img src={back} alt="icon zurück" />
               </button>
               {bubbleCount === 10 ? (
@@ -129,7 +134,10 @@ function Story() {
                   Start
                 </button>
               ) : (
-                <button className="p-3" onClick={plusCount}>
+                <button
+                  className="p-3"
+                  onClick={() => setBubbleCount(bubbleCount + 1)}
+                >
                   <img src={forward} alt="icon forwärts" />
                 </button>
               )}
@@ -138,24 +146,16 @@ function Story() {
         )}
 
         {/* Game is explained when player clicked through
-      the explaination (count >= 10) => Game starts */}
+          the explaination (count >= 10) => Game starts */}
         {gameStart && (
           // pictures with 10% of full width in display >= md
           <div>
             {/* Money */}
             <div className="absolute flex justify-center top-[2%] inset-x-[40%] p-1 bg-base-200 border-2 border-base-300 rounded-full">
               {/*make dynamic coin counter*/}
-              <p>0000</p>
-              <img className="h-[23px]" src={coin} alt="Coins"></img>
+              <p>{coins}</p>
+              <img className="h-[23px]" src={coinIcon} alt="Coins"></img>
             </div>
-
-            <Link
-              className="absolute top-[10%] left-[35%] right-[40%] 
-            md:top-[5%] sm:left-[40%] md:right-[46%]"
-              to="/play/wasserarm/shop"
-            >
-              <img src={shopIcon} alt="image of shop icon" className="w-full" />
-            </Link>
 
             <button
               className="help-icon absolute top-[20%]  left-[2%] md:right-[90%]"
@@ -166,13 +166,15 @@ function Story() {
             {help && (
               <p className="z-50 absolute top-[40%] inset-x-[10%] bg-white p-10 rounded-full">
                 Durch antippen der Fragezeichen started das Quiz. Für jede
-                richtige Antwort erhälst du 500 Coins
+                richtige Antwort erhälst du 500 Coins. <br />
+                Nachdem du alle 3 Fragen beantwortet hast, erscheint ein Shop,
+                über den du einkaufen kannst.
               </p>
             )}
 
             {/* question 3 */}
             <button
-              className={`question-3 absolute top-[25%] right-[28%] md:top-[22%] md:left-[60%] md:right-[30%] ${
+              className={`absolute top-[25%] right-[28%] md:top-[22%] md:left-[60%] md:right-[30%] ${
                 question2 === true
                   ? "bg-green-500"
                   : question2 === false
@@ -189,7 +191,7 @@ function Story() {
             </button>
             {/* question 2 */}
             <button
-              className={`question-2 absolute top-[45%] left-[23%] md:top-[43%] md:left-[25%] md:right-[65%] ${
+              className={`absolute top-[45%] left-[23%] md:top-[43%] md:left-[25%] md:right-[65%] ${
                 question1 === true
                   ? "bg-green-500"
                   : question1 === false
@@ -206,7 +208,7 @@ function Story() {
             </button>
             {/* question 1 */}
             <button
-              className={`question-1 absolute top-[55%] right-[28%] md:top-[52%] md:left-[60%] md:right-[30%] ${
+              className={`absolute top-[55%] right-[28%] md:top-[52%] md:left-[60%] md:right-[30%] ${
                 question0 === true
                   ? "bg-green-500"
                   : question0 === false
@@ -222,16 +224,32 @@ function Story() {
               ></img>
             </button>
 
-            <button className="go-icon absolute top-[83%] right-[34%] md:left-[55%] md:right-[35%]">
+            <button className="absolute top-[83%] right-[34%] md:left-[55%] md:right-[35%]">
               <img src={go} alt="Frage" className="w-full"></img>
             </button>
 
+            {/* Create quiz card */}
             {showQuiz && (
               <QuizCard
-                questionNumber={number}
-                handleAnswere={handleAnswere}
-                onClose={() => toggleQuestion(100)}
+                questionNumber={questionNumber}
+                handleAnswer={handleAnswer}
+                onClose={() => toggleQuestion()}
               />
+            )}
+
+            {/* Quiz finished. Show shop */}
+            {showShop && (
+              <Link
+                className="absolute top-[10%] left-[35%] right-[40%] 
+            md:top-[5%] sm:left-[40%] md:right-[46%]"
+                to="/play/wasserarm/shop"
+              >
+                <img
+                  src={shopIcon}
+                  alt="image of shop icon"
+                  className="w-full"
+                />
+              </Link>
             )}
           </div>
         )}
