@@ -6,13 +6,14 @@ import map from "/images/map.jpeg";
 import mapNone from "/images/mapNone.jpg";
 import question from "/icons/Question.svg";
 import shopIcon from "/icons/Shop.svg";
-import help from "/icons/Inquiry.svg";
+import helpIcon from "/icons/Inquiry.svg";
 import go from "/icons/Go.svg";
 import person from "/icons/Person.svg";
 import iconSpeechBubble from "/icons/SpeechBubble.svg";
 import back from "/icons/Back.svg";
 import forward from "/icons/Forward.svg";
 import coin from "/icons/Coin.svg";
+import { Link } from "react-router-dom";
 
 /**
  * Index / landing page
@@ -43,7 +44,10 @@ function Story() {
 
   const [gameStart, setGameStart] = useState(false);
 
+  const [help, setHelp] = useState(false);
+
   const [showQuiz, setShowQuiz] = useState(false);
+
   const [number, setNumber] = useState(0);
 
   function toggleQuestion(num) {
@@ -57,8 +61,14 @@ function Story() {
     }
   }
 
-  const [question2, setQuestion2] = useState(true);
-  const [question1, setQuestion1] = useState(false);
+  function handleAnswere(number, bool) {
+    if (number === 2) setQuestion2(bool);
+    else if (number === 1) setQuestion1(bool);
+    else if (number === 0) setQuestion0(bool);
+  }
+
+  const [question2, setQuestion2] = useState(null);
+  const [question1, setQuestion1] = useState(null);
   const [question0, setQuestion0] = useState(null);
 
   return (
@@ -139,15 +149,27 @@ function Story() {
               <img className="h-[23px]" src={coin} alt="Coins"></img>
             </div>
 
-            <button
-              className="shop-icon absolute top-[10%] left-[35%] right-[40%] 
+            <Link
+              className="absolute top-[10%] left-[35%] right-[40%] 
             md:top-[5%] sm:left-[40%] md:right-[46%]"
+              to="/play/wasserarm/shop"
             >
-              <img src={shopIcon} alt="Shop" className="w-full"></img>
+              <img src={shopIcon} alt="image of shop icon" className="w-full" />
+            </Link>
+
+            <button
+              className="help-icon absolute top-[20%]  left-[2%] md:right-[90%]"
+              onClick={() => setHelp(!help)}
+            >
+              <img src={helpIcon} alt="Frage" className="w-full"></img>
             </button>
-            <button className="help-icon absolute top-[20%]  left-[2%] md:right-[90%]">
-              <img src={help} alt="Frage" className="w-full"></img>
-            </button>
+            {help && (
+              <p className="z-50 absolute top-[40%] inset-x-[10%] bg-white p-10 rounded-full">
+                Durch antippen der Fragezeichen started das Quiz. Für jede
+                richtige Antwort erhälst du 500 Coins
+              </p>
+            )}
+
             {/* question 3 */}
             <button
               className={`question-3 absolute top-[25%] right-[28%] md:top-[22%] md:left-[60%] md:right-[30%] ${
@@ -207,7 +229,7 @@ function Story() {
             {showQuiz && (
               <QuizCard
                 questionNumber={number}
-                // isAnsweredRight={() => }
+                handleAnswere={handleAnswere}
                 onClose={() => toggleQuestion(100)}
               />
             )}

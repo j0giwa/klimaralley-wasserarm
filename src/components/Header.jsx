@@ -2,8 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import SearchBar from "./Searchbar";
 import Total from "./Total";
 import ThemeController from "./ThemeController";
-import coin from "/icons/Coin.svg";
+import coinIcon from "/icons/Coin.svg";
 import dummyPB from "/icons/dummyPB.webp";
+import { useShopContext } from "../lib/context";
 
 /**
  * Header UI Component
@@ -19,6 +20,9 @@ import dummyPB from "/icons/dummyPB.webp";
  * @author Jonas Schwind
  */
 function Header({ searchBar, categorys, total }) {
+  // users coins
+  const { coins } = useShopContext();
+
   // Language icon
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
@@ -42,7 +46,7 @@ function Header({ searchBar, categorys, total }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenuDropdown = () => {
-    setIsMenuOpen (!isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const handleProfileClick = (option) => {
@@ -56,19 +60,19 @@ function Header({ searchBar, categorys, total }) {
 
   let menuRef = useRef();
 
-// close the dropdown when it is clicked outside
-  useEffect(()=>{
+  // close the dropdown when it is clicked outside
+  useEffect(() => {
     let handler = (e) => {
-      if(!menuRef.current.contains(e.target)){
+      if (!menuRef.current.contains(e.target)) {
         setIsProfileOpen(false);
-        setIsMenuOpen(false)
-      }  
+        setIsMenuOpen(false);
+      }
     };
-    document.addEventListener("mousedown", handler)
-    
-    return() => {
+    document.addEventListener("mousedown", handler);
+
+    return () => {
       document.removeEventListener("mousedown", handler);
-    }
+    };
   });
 
   return (
@@ -77,10 +81,16 @@ function Header({ searchBar, categorys, total }) {
         {/* More Menu */}
         <div>
           <button className="btn-ghost" onClick={toggleMenuDropdown}>
-            <svg width="26" height="26" viewBox="0 0 26 26" className="fill-base-content" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 8.125C13.8975 8.125 14.625 7.39746 14.625 6.5C14.625 5.60254 13.8975 4.875 13 4.875C12.1025 4.875 11.375 5.60254 11.375 6.5C11.375 7.39746 12.1025 8.125 13 8.125Z"/>
-              <path d="M13 14.625C13.8975 14.625 14.625 13.8975 14.625 13C14.625 12.1025 13.8975 11.375 13 11.375C12.1025 11.375 11.375 12.1025 11.375 13C11.375 13.8975 12.1025 14.625 13 14.625Z"/>
-              <path d="M13 21.125C13.8975 21.125 14.625 20.3975 14.625 19.5C14.625 18.6025 13.8975 17.875 13 17.875C12.1025 17.875 11.375 18.6025 11.375 19.5C11.375 20.3975 12.1025 21.125 13 21.125Z"/>
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 26 26"
+              className="fill-base-content"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M13 8.125C13.8975 8.125 14.625 7.39746 14.625 6.5C14.625 5.60254 13.8975 4.875 13 4.875C12.1025 4.875 11.375 5.60254 11.375 6.5C11.375 7.39746 12.1025 8.125 13 8.125Z" />
+              <path d="M13 14.625C13.8975 14.625 14.625 13.8975 14.625 13C14.625 12.1025 13.8975 11.375 13 11.375C12.1025 11.375 11.375 12.1025 11.375 13C11.375 13.8975 12.1025 14.625 13 14.625Z" />
+              <path d="M13 21.125C13.8975 21.125 14.625 20.3975 14.625 19.5C14.625 18.6025 13.8975 17.875 13 17.875C12.1025 17.875 11.375 18.6025 11.375 19.5C11.375 20.3975 12.1025 21.125 13 21.125Z" />
             </svg>
           </button>
           {isMenuOpen && (
@@ -135,8 +145,8 @@ function Header({ searchBar, categorys, total }) {
         {/* Money */}
         <div className="flex gap-2 w-fit p-2 bg-base-200 border-2 border-base-300 rounded-full">
           {/*make dynamic coin counter*/}
-          <p>500</p>
-          <img className="h-[23px]" src={coin} alt="Coins"></img>
+          <p>{coins}</p>
+          <img className="h-[23px]" src={coinIcon} alt="Coins"></img>
         </div>
 
         {/* Profile */}
@@ -155,15 +165,35 @@ function Header({ searchBar, categorys, total }) {
                   onClick={() => handleProfileClick("Home")}
                 >
                   Home
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" className="stroke-base-content" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    className="stroke-base-content"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <g clip-path="url(#clip0_923_9958)">
-                    <path d="M14.6668 8.6361V9.65016C14.6668 12.2507 14.6668 13.551 13.8858 14.3589C13.1048 15.1668 11.8476 15.1668 9.3335 15.1668H6.66683C4.15267 15.1668 2.8956 15.1668 2.11454 14.3589C1.3335 13.551 1.3335 12.2507 1.3335 9.65016V8.6361C1.3335 7.11049 1.3335 6.34768 1.67963 5.71532C2.02576 5.08297 2.65813 4.6905 3.92285 3.90558L5.25618 3.07808C6.59309 2.24836 7.26156 1.8335 8.00016 1.8335C8.73876 1.8335 9.40723 2.24836 10.7442 3.07808L12.0775 3.90558C13.3422 4.6905 13.9746 5.08297 14.3207 5.71532" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M10 12.5H6" stroke-width="2" stroke-linecap="round"/>
+                      <path
+                        d="M14.6668 8.6361V9.65016C14.6668 12.2507 14.6668 13.551 13.8858 14.3589C13.1048 15.1668 11.8476 15.1668 9.3335 15.1668H6.66683C4.15267 15.1668 2.8956 15.1668 2.11454 14.3589C1.3335 13.551 1.3335 12.2507 1.3335 9.65016V8.6361C1.3335 7.11049 1.3335 6.34768 1.67963 5.71532C2.02576 5.08297 2.65813 4.6905 3.92285 3.90558L5.25618 3.07808C6.59309 2.24836 7.26156 1.8335 8.00016 1.8335C8.73876 1.8335 9.40723 2.24836 10.7442 3.07808L12.0775 3.90558C13.3422 4.6905 13.9746 5.08297 14.3207 5.71532"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M10 12.5H6"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
                     </g>
                     <defs>
-                    <clipPath id="clip0_923_9958">
-                    <rect width="16" height="16" fill="white" transform="translate(0 0.5)"/>
-                    </clipPath>
+                      <clipPath id="clip0_923_9958">
+                        <rect
+                          width="16"
+                          height="16"
+                          fill="white"
+                          transform="translate(0 0.5)"
+                        />
+                      </clipPath>
                     </defs>
                   </svg>
                 </li>
@@ -178,10 +208,32 @@ function Header({ searchBar, categorys, total }) {
                   onClick={() => handleProfileClick("Logout")}
                 >
                   Logout
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" className="stroke-base-content" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.6665 11.8332L13.9998 8.49984L10.6665 5.1665" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M14 8.5H6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6 14.5H3.33333C2.97971 14.5 2.64057 14.3595 2.39052 14.1095C2.14048 13.8594 2 13.5203 2 13.1667V3.83333C2 3.47971 2.14048 3.14057 2.39052 2.89052C2.64057 2.64048 2.97971 2.5 3.33333 2.5H6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    className="stroke-base-content"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.6665 11.8332L13.9998 8.49984L10.6665 5.1665"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M14 8.5H6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M6 14.5H3.33333C2.97971 14.5 2.64057 14.3595 2.39052 14.1095C2.14048 13.8594 2 13.5203 2 13.1667V3.83333C2 3.47971 2.14048 3.14057 2.39052 2.89052C2.64057 2.64048 2.97971 2.5 3.33333 2.5H6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
                   </svg>
                 </li>
               </ul>

@@ -4,6 +4,7 @@ import Leopoldstraße from "/images/Leopoldstraße.jpg";
 import Marktplatz from "/images/Marktplatz.jpg";
 import back from "/icons/Back.svg";
 import checkmark from "/icons/Checkmark.svg";
+import { useEffect } from "react";
 
 // Quiz data
 const quiz = [
@@ -34,7 +35,7 @@ const quiz = [
   },
 ];
 
-function QuizCard({ questionNumber, onClose }) {
+function QuizCard({ questionNumber, handleAnswere, onClose }) {
   const currentQuestion = quiz[questionNumber];
 
   const [selectedOption, setSelectedOption] = useState(null);
@@ -46,6 +47,16 @@ function QuizCard({ questionNumber, onClose }) {
   }
 
   const [feedback, setFeedback] = useState(false);
+
+  useEffect(() => {
+    if (feedback) {
+      if (selectedOption === currentQuestion.correctAnswer) {
+        handleAnswere(questionNumber, true); // Call ifCorrect if the answer is correct
+      } else {
+        handleAnswere(questionNumber, false); // Call ifWrong if the answer is incorrect
+      }
+    }
+  }, [feedback, selectedOption, currentQuestion, handleAnswere]);
 
   return (
     <div className="quiz-card flex flex-col absolute inset-[5%] bg-white p-3 rounded-lg shadow-lg max-w-md mx-auto">
@@ -92,7 +103,7 @@ function QuizCard({ questionNumber, onClose }) {
         </div>
       )}
 
-      {/* Back and login Button */}
+      {/* Back and verify answere button */}
       <div className="flex justify-around content-end flex-1">
         <button className="w-[15%]" onClick={() => onClose()}>
           <img src={back} alt="icon zurück" className="w-full" />
