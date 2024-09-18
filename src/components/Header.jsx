@@ -20,43 +20,8 @@ import { useShopContext } from "../lib/context";
  * @author Jonas Schwind
  */
 function Header({ searchBar, categorys, total }) {
-  // users coins
-  const { coins } = useShopContext();
-
-  // Language icon
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-
-  const toggleLanguageDropdown = () => {
-    setIsLanguageOpen(!isLanguageOpen);
-  };
-
-  const handleLanguageClick = (language) => {
-    // Handle language change or actions here
-    setIsLanguageOpen(false);
-  };
-
-  // Profile icon
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-
-  const toggleProfileDropdown = () => {
-    setIsProfileOpen(!isProfileOpen);
-  };
-
   //menu icon
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenuDropdown = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleProfileClick = (option) => {
-    // Handle navigation or actions here
-    if (option === "Problem melden") {
-      window.location.href =
-        "mailto:support@example.com?subject=Problem melden&body=Please describe the issue you are facing.";
-    }
-    setIsProfileOpen(false);
-  };
 
   let menuRef = useRef();
 
@@ -75,12 +40,41 @@ function Header({ searchBar, categorys, total }) {
     };
   });
 
+  // Language icon
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+
+  // TODO: Languange change
+  const handleLanguageChange = (language) => {
+    setIsLanguageOpen(false);
+  };
+
+  // users coins
+  const { coins } = useShopContext();
+
+  // Profile icon
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const handleProfileClick = (option) => {
+    // Handle navigation or actions here
+    if (option === "Problem melden") {
+      window.location.href =
+        "mailto:support@example.com?subject=Problem melden&body=Please describe the issue you are facing.";
+    } else if (option === "Home") {
+      window.location.href = "/play/wasserarm/shop"; // Navigate to the "Home" page
+      // TODO: Logout Method
+    }
+    setIsProfileOpen(false);
+  };
+
   return (
     <div className="z-20 fixed top-0 left-0 right-0 px-3 w-full py-[24px] bg-base-100 dark:backdrop-blur-3xl shadow-xl flex flex-col gap-4">
       <div className="flex items-center justify-between">
         {/* More Menu */}
         <div>
-          <button className="btn-ghost" onClick={toggleMenuDropdown}>
+          <button
+            className="btn-ghost"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             <svg
               width="26"
               height="26"
@@ -109,7 +103,7 @@ function Header({ searchBar, categorys, total }) {
                       width="25"
                       height="25"
                       viewBox="0 0 24 24"
-                      onClick={toggleLanguageDropdown}
+                      onClick={() => setIsLanguageOpen(!isLanguageOpen)}
                     >
                       <path
                         fill-rule="evenodd"
@@ -122,13 +116,13 @@ function Header({ searchBar, categorys, total }) {
                         <ul className="text-sm">
                           <li
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleLanguageClick("Englisch")}
+                            onClick={() => handleLanguageChange("Englisch")}
                           >
                             Englisch
                           </li>
                           <li
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleLanguageClick("Deutsch")}
+                            onClick={() => handleLanguageChange("Deutsch")}
                           >
                             Deutsch
                           </li>
@@ -155,7 +149,7 @@ function Header({ searchBar, categorys, total }) {
             src={dummyPB}
             alt="Profile picture"
             className="w-[40px] h-[40px] p-[1px] border border-base-300 rounded-full cursor-pointer"
-            onClick={toggleProfileDropdown}
+            onClick={() => setIsProfileOpen(!isProfileOpen)}
           />
           {isProfileOpen && (
             <div className="z-[1000] absolute right-0 mt-2 w-36 rounded-lg bg-base-200 shadow-lg">

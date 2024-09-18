@@ -1,65 +1,51 @@
 import React, { useState } from "react";
-import LangenbrückerTor from "/images/LangenbrückerTor.jpg";
-import Leopoldstraße from "/images/Leopoldstraße.jpg";
-import Marktplatz from "/images/Marktplatz.jpg";
+import { useEffect } from "react";
 import back from "/icons/Back.svg";
 import checkmark from "/icons/Checkmark.svg";
-import { useEffect } from "react";
+import { QUIZ } from "../lib/StoryInformation";
 
-// Quiz data
-const quiz = [
-  {
-    index: 1,
-    img: LangenbrückerTor, // Add image source when available
-    question: "Wo befindet sich diese Trinkwasserstelle?",
-    options: ["Langenbrücker Tor", "Regenstorplatz", "Ostertor"],
-    correctAnswer: "Langenbrücker Tor",
-  },
-  {
-    index: 2,
-    img: Marktplatz, // Add image source when available
-    question: "Wo befindet sich diese Trinkwasserstelle?",
-    options: ["Waisenhausplatz", "Treffpunkt", "Marktplatz"],
-    correctAnswer: "Marktplatz",
-  },
-  {
-    index: 3,
-    img: Leopoldstraße, // Add image source when available
-    question: "Wo befindet sich diese Station?",
-    options: [
-      "Ostertor-Wall an der Leopoldapotheke",
-      "Slaventor-Wall an der Teichanlage",
-      "Johannistorwall am Spielplatz",
-    ],
-    correctAnswer: "Ostertor-Wall an der Leopoldapotheke",
-  },
-];
-
+/**
+ * Renders a question card in the story game and provides feedback based on the user's answer.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {number} props.questionNumber - The index or number of the question being displayed.
+ * @param {Function} props.handleAnswer - Function to handle the user's answer and update the state.
+ * @param {Function} props.onClose - Function to be called when the quiz card is closed.
+ *
+ * @returns {JSX.Element} The rendered QuizCard component.
+ *
+ * @author Marlon Schrader
+ * @version 0.5.0
+ */
 function QuizCard({ questionNumber, handleAnswer, onClose }) {
-  const currentQuestion = quiz[questionNumber];
+  const currentQuestion = QUIZ[questionNumber];
 
   const [selectedOption, setSelectedOption] = useState(null);
 
-  function settingSelectedOption(option) {
-    if (feedback === false) {
+  const settingSelectedOption = (option) => {
+    if (showFeedback === false) {
       setSelectedOption(option);
     }
-  }
+  };
 
-  const [feedback, setFeedback] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
 
+  // Calls handleAnswer based on right/ wrong answer, which adds color and coins
   useEffect(() => {
-    if (feedback) {
+    if (showFeedback) {
       if (selectedOption === currentQuestion.correctAnswer) {
         handleAnswer(questionNumber, true); // Call ifCorrect if the answer is correct
       } else {
         handleAnswer(questionNumber, false); // Call ifWrong if the answer is incorrect
       }
     }
-  }, [feedback, selectedOption, currentQuestion, handleAnswer]);
+  }, [showFeedback, selectedOption, currentQuestion, handleAnswer]);
 
   return (
-    <div className="quiz-card flex flex-col absolute inset-[5%] bg-white p-3 rounded-lg shadow-lg max-w-md mx-auto">
+    <div
+      className="quiz-card z-[50] flex flex-col absolute inset-[5%] bg-white 
+    p-3 rounded-lg shadow-lg max-w-md mx-auto"
+    >
       {/* Image Section */}
       {currentQuestion.img && (
         <img
@@ -90,7 +76,7 @@ function QuizCard({ questionNumber, handleAnswer, onClose }) {
       </div>
 
       {/* Feedback */}
-      {feedback && (
+      {showFeedback && (
         <div className="mt-4">
           {selectedOption === currentQuestion.correctAnswer ? (
             // add coins for right answere
@@ -108,7 +94,7 @@ function QuizCard({ questionNumber, handleAnswer, onClose }) {
         <button className="w-[15%]" onClick={() => onClose()}>
           <img src={back} alt="icon zurück" className="w-full" />
         </button>
-        <button className="w-[15%]" onClick={() => setFeedback(true)}>
+        <button className="w-[15%]" onClick={() => setShowFeedback(true)}>
           <img src={checkmark} alt="icon checkmark" className="w-full" />
         </button>
       </div>
