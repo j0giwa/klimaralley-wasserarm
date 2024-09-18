@@ -75,19 +75,60 @@ export function ShopContextProvider({ children }) {
     localStorage.setItem("cartItems", JSON.stringify(shop.cartItems));
   }, [shop.cartItems]);
 
-
-  //save the amount of coins in the local storage.
+  // Keep track of water
   useEffect(() => {
-    localStorage.setItem("coins", JSON.stringify(ccoins));
-  }, [ccoins]);
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/water';
 
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
 
-  //save the quantity of water in the local storage
-  useEffect(() => {
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    fetch(`${api}${method}`, {
+      method: 'GET',
+      headers: headers
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setCcoins(data.coins);
+    })
+    .catch((err) => {
+      console.error(err.message);
+    })
+
     localStorage.setItem("water", JSON.stringify(coins));
   }, [coins]);
 
+  const sendWaterData = async (ammount) => {
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/water';
 
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    fetch(`${api}${method}/?Amount=${ammount}`, {
+      method: 'PATCH',
+      headers: headers
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setCcoins(data.water);
+    })
+    .catch((err) => {
+      console.error(err.message);
+    })
+  };
 
   // Keep track of coins
   useEffect(() => {
@@ -109,13 +150,15 @@ export function ShopContextProvider({ children }) {
     })
     .then((response) => response.json())
     .then((data) => {
-      setCoins(data.coins);     
+      setCcoins(data.coins);
     })
-    .catch((err) => { 
-      console.error(err.message); 
+    .catch((err) => {
+      console.error(err.message);
     })
-  }, [coins]);
 
+    localStorage.setItem("coins", JSON.stringify(data.coins));
+  }, [ccoins]);
+  
   /**
    * Looks if the item is already in the cart and if so will add the quantity.
    * Else it will add the item

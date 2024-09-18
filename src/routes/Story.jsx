@@ -30,7 +30,7 @@ function Story() {
   }, []);
 
   // users coins and water quantity
-  const { coins, setCoins, ccoins } = useShopContext();
+  const { coins, setCoins, ccoins, sendWaterData } = useShopContext();
 
   // everything for game explaination
   const [showGameExplanation, setShowGameExplanation] = useState(true);
@@ -84,7 +84,8 @@ function Story() {
     if (isCorrect) {
       if (!questionStates[number]) {
         setQuestionFunctions[number](true);
-        setCoins(coins + 500);
+        sendWaterData(500);
+        //setCoins(coins + 500);
       }
     } else if (!isCorrect && questionStates[number] === true) {
       // Question that is true cannot be set to false
