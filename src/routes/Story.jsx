@@ -11,7 +11,7 @@ import go from "/icons/Go.svg";
 import person from "/icons/Person.svg";
 import iconSpeechBubble from "/icons/SpeechBubble.svg";
 import back from "/icons/Back.svg";
-import forward from "/icons/Forward.svg";
+import forward from "/icons/forward.svg";
 import coin from "/icons/Coin.svg";
 
 /**
