@@ -26,32 +26,26 @@ function ShopItem({ shopItems, onAdd }) {
 
   return (
     <li>
-      <div className="card w-[184px] h-[313px] my-3 bg-base-300 shadow-xl lg:mx-2">
-        <figure className="w-[184px] h-[145px] m-auto">
-          <img className="object-cover" src={getIcon(shopItems.icon)} alt={shopItems.name} />
+      <div className="card card-compact w-[184px] h-[350px] my-3 bg-base-300 shadow-xl lg:mx-2">
+        <figure>
+          <img className="w-full h-48 object-contain" src={getIcon(shopItems.icon)} alt={shopItems.name} />
         </figure>
         <div className="card-body items-center text-center">
           <h2 className="card-title">{shopItems.name}</h2>
           <p>
             Wasser: <span className="text-info">{shopItems.water} L</span>
           </p>
+          <p className="inline-flex items-center">
+            <span>Preis:</span>
+            <span className="mx-4">{shopItems.price}</span>
+            <img className="h-[23px] ml-2" src={coin} alt="Coins" />
+          </p>
         </div>
         <div className="card-actions justify-end p-0">
-          <div className="w-full px-[10px] flex flex-col">
-             <div className="flex justify-between">
-              Preis :
-              <div className="flex ">
-                <span>{shopItems.price}</span>
-                <img className="h-[23px]" src={coin} alt="Coins"></img>
-              </div>
-             </div>
-          </div>
-          <div>
-            <button className="btn btn-primary text-white text-xl font-bold w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem]"
-              onClick={() => onAdd(shopItems)}>
-                +
-            </button>
-          </div>
+          <button className="btn btn-primary text-white text-xl font-bold w-[37px] h-[41px] rounded-tl-[1rem] rounded-tr-none rounded-bl-none rounded-br-[1rem]"
+            onClick={() => onAdd(shopItems)}>
+              +
+          </button>
         </div>
       </div>
     </li>
