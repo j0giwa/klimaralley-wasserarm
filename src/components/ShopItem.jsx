@@ -37,7 +37,7 @@ function ShopItem({ shopItems, onAdd }) {
           </p>
           <p className="inline-flex items-center">
             <span>Preis:</span>
-            <span className="mx-4">{shopItems.price}</span>
+            <span className="mx-2">{shopItems.price}</span>
             <img className="h-[23px] ml-2" src={coin} alt="Coins" />
           </p>
         </div>
