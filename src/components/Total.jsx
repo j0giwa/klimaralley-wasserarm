@@ -61,11 +61,7 @@ function Total() {
 
     await fetch(`${api}${method}`, {
       method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-          // TODO: Add authorisation bearer token
-      },
+      headers: headers,
       body: JSON.stringify({
         eaterid: 0, // TODO: Change to actual eaterid
         items: wasserarmShopItems

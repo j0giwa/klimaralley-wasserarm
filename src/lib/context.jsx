@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
+import { getCookie } from "../lib/cookieUtils";
 export const ShopContext = createContext();
 
 /**
@@ -11,9 +11,13 @@ export const ShopContext = createContext();
  * @version 0.5.0
  */
 export function ShopContextProvider({ children }) {
+
+  /** @type {String} */
+  const [authToken, setAuthToken] = useState("");
+
   /**
    * Coins of the user.
-   * @typedef {number} coins - The amount of coins the user has.
+   * @type {number} coins - The amount of coins the user has.
    */
   const [coins, setCoins] = useState(1000);
 
@@ -31,8 +35,17 @@ export function ShopContextProvider({ children }) {
   /** @type {{shopItems:ShopItem[], cartItems:ShopItem[]}} */
   const [shop, setShop] = useState({ shopItems: [], cartItems: [] });
 
+  // Authorisation token
+  useEffect(() => {
+    const jwtToken = getCookie("jwt");
+    if (jwtToken) {
+      setAuthToken(jwtToken);
+    }
+  }, []);
+
   // make shure to fetch data from the local storage of the browser after the reload of the webpage
   useEffect(() => {
+
     const cartItems = JSON.parse(localStorage.getItem("cartItems"));
 
     setShop((state) => {
@@ -49,6 +62,33 @@ export function ShopContextProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(shop.cartItems));
   }, [shop.cartItems]);
+
+  // Keep track of coins
+  useEffect(() => {
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/coins';
+
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    fetch(`${api}${method}`, {
+      method: 'GET',
+      headers: headers
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setCoins(data.coins);     
+    })
+    .catch((err) => { 
+      console.error(err.message); 
+    })
+  }, [coins]);
 
   /**
    * Looks if the item is already in the cart and if so will add the quantity.
