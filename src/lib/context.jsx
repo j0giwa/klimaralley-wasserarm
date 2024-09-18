@@ -16,10 +16,16 @@ export function ShopContextProvider({ children }) {
   const [authToken, setAuthToken] = useState("");
 
   /**
-   * Coins of the user.
-   * @type {number} coins - The amount of coins the user has.
+   * Water quantity of the user.
+   * @type {number} water quantity - The quantity of water the user has.
    */
   const [coins, setCoins] = useState(1000);
+
+  /**
+   * The coins of the user
+   * @type {number} coins - The amount of coins the user has.
+   *  */
+  const [ccoins, setCcoins] = useState(2000);
 
   /**
    * Represents an array of ShopItems for the shop.
@@ -155,7 +161,7 @@ export function ShopContextProvider({ children }) {
 
   return (
     <ShopContext.Provider
-      value={{ shop, setShop, onAdd, onRemove, onRemoveItem, coins, setCoins }}
+      value={{ shop, setShop, onAdd, onRemove, onRemoveItem, coins, setCoins, ccoins, setCcoins}}
     >
       {children}
     </ShopContext.Provider>

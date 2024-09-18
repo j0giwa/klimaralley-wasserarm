@@ -12,6 +12,7 @@ import iconSpeechBubble from "/icons/SpeechBubble.svg";
 import back from "/icons/Back.svg";
 import forward from "/icons/forward.svg";
 import coinIcon from "/icons/Coin.svg";
+import dropWater from "/icons/drop-water.svg"
 import { Link } from "react-router-dom";
 import { useShopContext } from "../lib/context";
 import QuizCard from "../components/QuizCard";
@@ -28,8 +29,8 @@ function Story() {
     document.title = "Wasserarmsatt";
   }, []);
 
-  // users coins
-  const { coins, setCoins } = useShopContext();
+  // users coins and water quantity
+  const { coins, setCoins, ccoins } = useShopContext();
 
   // everything for game explaination
   const [showGameExplanation, setShowGameExplanation] = useState(true);
@@ -191,13 +192,29 @@ function Story() {
         {/* Game is explained and start button pressed => Game Starts*/}
         {gameStart && (
           <div>
-            {/* Money */}
+           {/*  {/* Money *
             <div
               className="absolute flex justify-center top-[2%] inset-x-[40%] 
             p-1 bg-base-200 border-2 border-base-300 rounded-full"
             >
               <p>{coins}</p>
               <img className="h-[23px]" src={coinIcon} alt="Coins"></img>
+            </div> */}
+
+                {/* Money */}
+            <div className="absolute flex gap-1 justify-center top-[2%] inset-x-[40%] w-80 mx-auto">
+              <div className="flex gap-2 w-fit p-2 bg-base-200 border-2 border-base-300 rounded-full">
+                {/*make dynamic coin counter*/}
+                <p>{coins} L</p>
+                <img className="h-6" src={dropWater} alt="Coins"></img>
+              </div>
+
+              {/* Water */}
+              <div className="flex gap-2 w-fit p-2 bg-base-200 border-2 border-base-300 rounded-full">
+                {/*make dynamic water amount counter*/}
+                <p>{ccoins}</p>
+                <img className="h-[23px]" src={coinIcon} alt="Coins"></img>
+              </div>
             </div>
 
             <button

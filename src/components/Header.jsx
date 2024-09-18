@@ -3,6 +3,7 @@ import SearchBar from "./Searchbar";
 import Total from "./Total";
 import ThemeController from "./ThemeController";
 import coinIcon from "/icons/Coin.svg";
+import dropWater from "/icons/drop-water.svg"
 import dummyPB from "/icons/dummyPB.webp";
 import { useShopContext } from "../lib/context";
 
@@ -20,6 +21,9 @@ import { useShopContext } from "../lib/context";
  * @author Jonas Schwind
  */
 function Header({ searchBar, categorys, total }) {
+  // users coins
+  const { coins, ccoins } = useShopContext();
+
   //menu icon
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -48,8 +52,6 @@ function Header({ searchBar, categorys, total }) {
     setIsLanguageOpen(false);
   };
 
-  // users coins
-  const { coins } = useShopContext();
 
   // Profile icon
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -137,11 +139,21 @@ function Header({ searchBar, categorys, total }) {
         </div>
 
         {/* Money */}
-        <div className="flex gap-2 w-fit p-2 bg-base-200 border-2 border-base-300 rounded-full">
-          {/*make dynamic coin counter*/}
-          <p>{coins}</p>
-          <img className="h-[23px]" src={coinIcon} alt="Coins"></img>
+        <div className="flex gap-1">
+          <div className="flex gap-2 w-fit p-2 bg-base-200 border-2 border-base-300 rounded-full">
+            {/*make dynamic coin counter*/}
+            <p>{coins} L</p>
+            <img className="h-6" src={dropWater} alt="Coins"></img>
+          </div>
+
+          {/* Water */}
+          <div className="flex gap-2 w-fit p-2 bg-base-200 border-2 border-base-300 rounded-full">
+            {/*make dynamic water amount counter*/}
+            <p>{ccoins}</p>
+            <img className="h-[23px]" src={coinIcon} alt="Coins"></img>
+          </div>
         </div>
+        
 
         {/* Profile */}
         <div className="relative">
