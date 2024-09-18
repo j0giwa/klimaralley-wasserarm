@@ -19,13 +19,19 @@ export function ShopContextProvider({ children }) {
    * Water quantity of the user.
    * @type {number} water quantity - The quantity of water the user has.
    */
-  const [coins, setCoins] = useState(1000);
+  const [coins, setCoins] = useState(() => {
+    const savedWater = localStorage.getItem("water");
+    return savedWater ? JSON.parse(savedWater) : 1000;
+  });
 
   /**
    * The coins of the user
    * @type {number} coins - The amount of coins the user has.
    *  */
-  const [ccoins, setCcoins] = useState(2000);
+  const [ccoins, setCcoins] = useState(() => {
+    const savedCoins = localStorage.getItem("coins");
+    return savedCoins ? JSON.parse(savedCoins) : 2000;
+  });
 
   /**
    * Represents an array of ShopItems for the shop.
@@ -68,6 +74,20 @@ export function ShopContextProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(shop.cartItems));
   }, [shop.cartItems]);
+
+
+  //save the amount of coins in the local storage.
+  useEffect(() => {
+    localStorage.setItem("coins", JSON.stringify(ccoins));
+  }, [ccoins]);
+
+
+  //save the quantity of water in the local storage
+  useEffect(() => {
+    localStorage.setItem("water", JSON.stringify(coins));
+  }, [coins]);
+
+
 
   // Keep track of coins
   useEffect(() => {

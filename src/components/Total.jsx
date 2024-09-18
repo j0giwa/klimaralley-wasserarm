@@ -11,7 +11,7 @@ import Alert from './Alert';
  */
 function Total() {
 
-  const {shop:{cartItems}, coins, ccoins} = useShopContext()
+  const {shop:{cartItems}, coins, ccoins, setCoins, setCcoins} = useShopContext()
 
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const totalWater = cartItems.reduce((a, c) => a + c.water * c.qty, 0);
@@ -54,6 +54,7 @@ const submit = async (wasserarmShopItems) => {
   };
 
   if (totalPrice <= ccoins && totalWater <= coins) {
+    
     if (authToken) {
       headers['Authorization'] = `Bearer ${authToken}`;
     }
@@ -69,6 +70,8 @@ const submit = async (wasserarmShopItems) => {
       });
 
       const data = await response.json();
+      setCcoins(ccoins-totalPrice);
+      setCoins(coins-totalWater)
       setAlertMessage('Ihre Punktzahl ist ' + data.score);
       setAlertType('success');
       return data.score; // Return the score
