@@ -104,8 +104,8 @@ function Total() {
           <div className="text-center h-20 flex flex-col gap-5">
             {showAlert && <Alert className="z-50" message={alertMessage} type={alertType} onClose={handleCloseAlert} />}
             <div className="flex justify-between">
-              <p className="">Wasser Insgesamt: <span className="text-info font-semibold">{totalWater} L</span> </p>
-                <p>Gesamtpreis: <span className="text-info font-semibold">{totalPrice} 🪙</span> </p>
+              <p>Wasser Insgesamt: <span className="text-info font-semibold">{totalWater} L</span> </p>
+              <p>Gesamtpreis: <span className="text-info font-semibold">{totalPrice} 🪙</span> </p>
             </div>
             <div>
               <button className="btn btn-secondary font-semibold px-2 rounded-xl w-20" onClick={() => submit(cartItems)}>Bereiten</button>
