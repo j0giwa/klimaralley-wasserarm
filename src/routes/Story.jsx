@@ -136,7 +136,7 @@ function Story() {
                 ></img>
                 <div
                   className="absolute inset-0 pl-12 px-10 flex items-center 
-                justify-center text-lg text-black"
+                justify-center text-lg text-black font-semibold"
                 >
                   {bubbleContent.text}
                 </div>

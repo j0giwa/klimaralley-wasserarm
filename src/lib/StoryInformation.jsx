@@ -18,7 +18,7 @@ export const SPEECHBUBBLE = [
 
   {
     index: 4,
-    text: "Für Nahrungsmittel wird viel Wasser verbraucht, eshalb sollst du ein Wassereffizientes Gericht zubereiten.",
+    text: "Für Nahrungsmittel wird viel Wasser verbraucht, deshalb sollst du ein Wassereffizientes Gericht zubereiten.",
   },
   {
     index: 5,

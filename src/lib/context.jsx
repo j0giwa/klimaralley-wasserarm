@@ -47,6 +47,50 @@ export function ShopContextProvider({ children }) {
   /** @type {{shopItems:ShopItem[], cartItems:ShopItem[]}} */
   const [shop, setShop] = useState({ shopItems: [], cartItems: [] });
 
+  /**
+   * Represents an eater object.
+   *
+   * @typedef {Object} Eater
+   * @property {number} id - The ID of the eater.
+   * @property {String} name - Name of the eater.
+   * @property {EaterDiet} diet - Eaters diet (normal vegan etc.)
+   * @property {ShopItem[]} preferences - Eaters preferences
+   */
+
+  /** @type {Eater} */
+  const [eater, setEater] = useState(() => {
+    const savedEater = localStorage.getItem("eater");
+    return savedEater ? JSON.parse(savedCoins) : 0;
+  });
+
+  useEffect(() => {
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/eater';
+
+    fetch(`${api}${method}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setEater(data);
+      localStorage.setItem("eater", data);
+    })
+    .catch((err) => {
+      console.error(err.message);
+    });
+  });
+
+  useEffect(() => {
+    const jwtToken = getCookie("jwt");
+    if (jwtToken) {
+      setAuthToken(jwtToken);
+    }
+  }, []);
+
   // Authorisation token
   useEffect(() => {
     const jwtToken = getCookie("jwt");
@@ -226,7 +270,7 @@ export function ShopContextProvider({ children }) {
 
   return (
     <ShopContext.Provider
-      value={{ shop, setShop, onAdd, onRemove, onRemoveItem, coins, setCoins, ccoins, setCcoins, sendWaterData }}
+      value={{ shop, setShop, onAdd, onRemove, onRemoveItem, eater, coins, setCoins, ccoins, setCcoins, sendWaterData }}
     >
       {children}
     </ShopContext.Provider>

@@ -11,7 +11,7 @@ import Alert from './Alert';
  */
 function Total() {
 
-  const {shop:{cartItems}, coins, ccoins, setCoins, setCcoins} = useShopContext()
+  const {shop:{cartItems}, coins, ccoins, setCoins, setCcoins, eater} = useShopContext()
 
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const totalWater = cartItems.reduce((a, c) => a + c.water * c.qty, 0);
@@ -21,7 +21,6 @@ function Total() {
   useEffect(() => {
     const jwtToken = getCookie("jwt");
     if (jwtToken) {
-      console.log(jwtToken);
       setAuthToken(jwtToken);
     }
   }, []);
@@ -40,62 +39,63 @@ function Total() {
   };
 
   /**
- * Send the game state to backend for evaluation.
- *
- * @param {ShopItem[]} wasserarmShopItems
- * @returns {Promise<number>} Score
- */
-const submit = async (wasserarmShopItems) => {
-  const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
-  const method = '/water/score';
-  const headers = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  };
+   * Send the game state to backend for evaluation.
+   *
+   * @param {ShopItem[]} wasserarmShopItems
+   * @returns {Promise<number>} Score
+   */
+  const submit = async (wasserarmShopItems) => {
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/score';
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
 
-  if (totalPrice <= ccoins && totalWater <= coins) {
-    
-    if (authToken) {
-      headers['Authorization'] = `Bearer ${authToken}`;
-    }
+    if (totalPrice <= ccoins && totalWater <= coins) {
 
-    try {
-      const response = await fetch(`${api}${method}`, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify({
-          eaterid: 0, // TODO: Change to actual eaterid
-          items: wasserarmShopItems
-        }),
-      });
+      if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
+      }
 
-      const data = await response.json();
-      setCcoins(ccoins-totalPrice);
-      setCoins(coins-totalWater)
-      setAlertMessage('Ihre Punktzahl ist ' + data.score);
-      setAlertType('success');
-      return data.score; // Return the score
-    } catch (err) {
-      console.error(err.message);
-    } finally {
+      console.log(eater);
+
+      try {
+        const response = await fetch(`${api}${method}`, {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({
+            eaterid: eater.id,
+            items: wasserarmShopItems
+          }),
+        });
+
+        const data = await response.json();
+        setCcoins(ccoins-totalPrice);
+        setCoins(coins-totalWater)
+        setAlertMessage('Ihre Punktzahl ist ' + data.score);
+        setAlertType('success');
+        return data.score; // Return the score
+      } catch (err) {
+        console.error(err.message);
+      } finally {
+        setShowAlert(true);
+      }
+    } else if (totalPrice > ccoins && totalWater > coins) {
+      setAlertMessage(`Reicht nicht aus!! Du brauchst genug Geld und Wasser!!`)
+      setAlertType('error');
       setShowAlert(true);
     }
-  } else if (totalPrice > ccoins && totalWater > coins) {
-    setAlertMessage(`Reicht nicht aus!! Du brauchst genug Geld und Wasser!!`)
-    setAlertType('error');
-    setShowAlert(true);
-  }
-  else if (totalPrice > ccoins) {
-    setAlertMessage(`Unzureichende Geld! (Gesamtpreis: ${totalPrice}, Verfügbare Geld: ${ccoins})`);
-    setAlertType('error');
-    setShowAlert(true);
-  } else if (totalWater > coins) {
-    setAlertMessage(`Unzureichende Wassermenge! Schade (Gesamtwasser: ${totalWater}, Verfügbare Wassermenge: ${coins})`);
-    setAlertType('error');
-    setShowAlert(true);
-  }
-};
-
+    else if (totalPrice > ccoins) {
+      setAlertMessage(`Unzureichende Geld! (Gesamtpreis: ${totalPrice}, Verfügbare Geld: ${ccoins})`);
+      setAlertType('error');
+      setShowAlert(true);
+    } else if (totalWater > coins) {
+      setAlertMessage(`Unzureichende Wassermenge! Schade (Gesamtwasser: ${totalWater}, Verfügbare Wassermenge: ${coins})`);
+      setAlertType('error');
+      setShowAlert(true);
+    }
+  };
 
   return (
     <>
