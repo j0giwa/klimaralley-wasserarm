@@ -207,7 +207,7 @@ export function ShopContextProvider({ children }) {
   
   //save the quantity of coins in the local storage
   useEffect(() => {
-    localStorage.setItem("cins", JSON.stringify(ccoins));
+    localStorage.setItem("coins", JSON.stringify(ccoins));
   }, [ccoins]);
 
   /**
