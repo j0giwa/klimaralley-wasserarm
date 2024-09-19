@@ -21,7 +21,7 @@ export function ShopContextProvider({ children }) {
    */
   const [coins, setCoins] = useState(() => {
     const savedWater = localStorage.getItem("water");
-    return savedWater ? JSON.parse(savedWater) : 1000;
+    return savedWater ? JSON.parse(savedWater) : 0;
   });
 
   /**
@@ -30,7 +30,7 @@ export function ShopContextProvider({ children }) {
    *  */
   const [ccoins, setCcoins] = useState(() => {
     const savedCoins = localStorage.getItem("coins");
-    return savedCoins ? JSON.parse(savedCoins) : 2000;
+    return savedCoins ? JSON.parse(savedCoins) : 0;
   });
 
   /**
@@ -75,19 +75,41 @@ export function ShopContextProvider({ children }) {
     localStorage.setItem("cartItems", JSON.stringify(shop.cartItems));
   }, [shop.cartItems]);
 
-
-  //save the amount of coins in the local storage.
+  // Keep track of water
   useEffect(() => {
-    localStorage.setItem("coins", JSON.stringify(ccoins));
-  }, [ccoins]);
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/water';
 
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
 
-  //save the quantity of water in the local storage
-  useEffect(() => {
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    fetch(`${api}${method}`, {
+      method: 'GET',
+      headers: headers
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setCoins(data.water);
+    })
+    .catch((err) => {
+      console.error(err.message);
+    });
+
     localStorage.setItem("water", JSON.stringify(coins));
   }, [coins]);
 
-
+  //save the quantity of water in the local storage
+  /*
+  useEffect(() => {
+    localStorage.setItem("water", JSON.stringify(coins));
+  }, [coins]);
+  */
 
   // Keep track of coins
   useEffect(() => {
@@ -109,12 +131,21 @@ export function ShopContextProvider({ children }) {
     })
     .then((response) => response.json())
     .then((data) => {
-      setCoins(data.coins);     
+      setCcoins(data.coins);
     })
-    .catch((err) => { 
-      console.error(err.message); 
-    })
-  }, [coins]);
+    .catch((err) => {
+      console.error(err.message);
+    });
+
+    localStorage.setItem("coins", JSON.stringify(ccoins));
+  }, [ccoins]);
+
+  //save the amount of coins in the local storage.
+  /*
+  useEffect(() => {
+    localStorage.setItem("coins", JSON.stringify(ccoins));
+  }, [ccoins]);
+  */
 
   /**
    * Looks if the item is already in the cart and if so will add the quantity.
