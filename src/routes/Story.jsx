@@ -85,7 +85,6 @@ function Story() {
       if (!questionStates[number]) {
         setQuestionFunctions[number](true);
         sendWaterData(500);
-        //setCoins(coins + 500);
       }
     } else if (!isCorrect && questionStates[number] === true) {
       // Question that is true cannot be set to false

@@ -60,7 +60,7 @@ export function ShopContextProvider({ children }) {
   /** @type {Eater} */
   const [eater, setEater] = useState(() => {
     const savedEater = localStorage.getItem("eater");
-    return savedEater ? JSON.parse(savedCoins) : 0;
+    return savedEater ? savedEater : "";
   });
 
   useEffect(() => {
@@ -144,7 +144,10 @@ export function ShopContextProvider({ children }) {
     .catch((err) => {
       console.error(err.message);
     });
+  }, [coins]);
 
+  //save the quantity of water in the local storage
+  useEffect(() => {
     localStorage.setItem("water", JSON.stringify(coins));
   }, [coins]);
 
@@ -167,7 +170,6 @@ export function ShopContextProvider({ children }) {
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log('Water update Response data:', data);
       setCoins(data.water);
       localStorage.setItem("water", JSON.stringify(data.water));
     })
@@ -201,10 +203,13 @@ export function ShopContextProvider({ children }) {
     .catch((err) => {
       console.error(err.message);
     });
-
-    localStorage.setItem("coins", JSON.stringify(ccoins));
   }, [ccoins]);
   
+  //save the quantity of coins in the local storage
+  useEffect(() => {
+    localStorage.setItem("cins", JSON.stringify(ccoins));
+  }, [ccoins]);
+
   /**
    * Looks if the item is already in the cart and if so will add the quantity.
    * Else it will add the item
