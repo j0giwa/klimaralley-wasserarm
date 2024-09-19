@@ -104,12 +104,33 @@ export function ShopContextProvider({ children }) {
     localStorage.setItem("water", JSON.stringify(coins));
   }, [coins]);
 
-  //save the quantity of water in the local storage
-  /*
-  useEffect(() => {
-    localStorage.setItem("water", JSON.stringify(coins));
-  }, [coins]);
-  */
+  const sendWaterData = async (ammount) => {
+    const api = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+    const method = '/water/water';
+
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    await fetch(`${api}${method}?Amount=${ammount}`, {
+      method: 'PATCH',
+      headers: headers
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Water update Response data:', data);
+      setCoins(data.water);
+      localStorage.setItem("water", JSON.stringify(data.water));
+    })
+    .catch((err) => {
+      console.error(err.message);
+    });
+  };
 
   // Keep track of coins
   useEffect(() => {
@@ -139,13 +160,6 @@ export function ShopContextProvider({ children }) {
 
     localStorage.setItem("coins", JSON.stringify(ccoins));
   }, [ccoins]);
-
-  //save the amount of coins in the local storage.
-  /*
-  useEffect(() => {
-    localStorage.setItem("coins", JSON.stringify(ccoins));
-  }, [ccoins]);
-  */
   
   /**
    * Looks if the item is already in the cart and if so will add the quantity.
@@ -212,7 +226,7 @@ export function ShopContextProvider({ children }) {
 
   return (
     <ShopContext.Provider
-      value={{ shop, setShop, onAdd, onRemove, onRemoveItem, coins, setCoins, ccoins, setCcoins}}
+      value={{ shop, setShop, onAdd, onRemove, onRemoveItem, coins, setCoins, ccoins, setCcoins, sendWaterData }}
     >
       {children}
     </ShopContext.Provider>
