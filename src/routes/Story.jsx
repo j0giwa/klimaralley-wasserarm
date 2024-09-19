@@ -202,7 +202,7 @@ function Story() {
             </div> */}
 
                 {/* Money */}
-            <div className="absolute flex gap-1 justify-center top-[2%] inset-x-[30%] w-80">
+            <div className="absolute flex gap-1 justify-center top-[2%] inset-x-[30%]">
               <div className="flex gap-2 w-fit p-2 bg-base-200 border-2 border-base-300 rounded-full">
                 {/*make dynamic coin counter*/}
                 <p>{coins} L</p>
