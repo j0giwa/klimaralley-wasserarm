@@ -192,17 +192,8 @@ function Story() {
         {/* Game is explained and start button pressed => Game Starts*/}
         {gameStart && (
           <div>
-           {/*  {/* Money *
-            <div
-              className="absolute flex justify-center top-[2%] inset-x-[40%] 
-            p-1 bg-base-200 border-2 border-base-300 rounded-full"
-            >
-              <p>{coins}</p>
-              <img className="h-[23px]" src={coinIcon} alt="Coins"></img>
-            </div> */}
-
-                {/* Money */}
             <div className="absolute flex gap-1 justify-center top-[2%] inset-x-[30%]">
+              {/* Money */}
               <div className="flex gap-2 w-fit p-2 bg-base-200 border-2 border-base-300 rounded-full">
                 {/*make dynamic coin counter*/}
                 <p>{coins} L</p>
@@ -304,7 +295,7 @@ function Story() {
             {showShop && (
               <Link
                 className="z-[0] absolute top-[10%] left-[35%] right-[40%] 
-            md:top-[5%] sm:left-[40%] md:right-[46%]"
+                           md:top-[5%] sm:left-[40%] md:right-[46%]"
                 to="/play/wasserarm/shop"
               >
                 <img
